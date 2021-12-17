@@ -6,11 +6,61 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:08:37 by ael-asri          #+#    #+#             */
-/*   Updated: 2021/12/15 22:27:33 by ael-asri         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:14:00 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_sa(t_stack *a)
+{
+	t_stack	*temp;
+	int		res;
+
+	temp = a->next;
+	if (ft_lstsize(a) > 1)
+	{
+		while (temp->next != NULL)
+		{
+			a = a->next;
+			temp = a->next;
+		}
+		if (temp->data < a->data)
+		{
+			res = temp->data;
+			temp->data = a->data;
+			a->data = res;
+		}
+	}
+}
+
+void	ft_sb(t_stack *b)
+{
+	t_stack	*temp;
+	int		res;
+
+	temp = b->next;
+	if (ft_lstsize(b) > 1)
+	{
+		while (temp->next != NULL)
+		{
+			b = b->next;
+			temp = b->next;
+		}
+		if (temp->data < b->data)
+		{
+			res = temp->data;
+			temp->data = b->data;
+			b->data = res;
+		}
+	}
+}
+
+void	ft_ss(t_stack *a, t_stack *b)
+{
+	ft_sa(a);
+	ft_sb(b);
+}
 
 void	ft_pa(t_stack *a, t_stack *b)
 {
@@ -84,7 +134,7 @@ void	ft_rra(t_stack *a)
 {
 	t_stack	*temp;
 	int		last;
-	int 	res;
+	int		res;
 
 	temp = ft_lstlast(a);
 	last = temp->data;
@@ -98,6 +148,52 @@ void	ft_rra(t_stack *a)
 		temp->data = res;
 		a->data = temp->data;
 	}
+}
+
+void	ft_rrb(t_stack *b)
+{
+	t_stack	*temp;
+	int		last;
+	int		res;
+
+	temp = ft_lstlast(b);
+	last = temp->data;
+	b->data = last;
+	temp = b->next;
+	while (b->next != NULL)
+	{
+		temp->data = b->data;
+		b = b->next;
+		res = b->data;
+		temp->data = res;
+		b->data = temp->data;
+	}
+}
+
+void	ft_rrr(t_stack *a, t_stack *b)
+{
+	ft_rra(a);
+	ft_rrb(b);
+}
+
+void	ft_is_sorted(t_stack *b)
+{
+	t_stack	*temp;
+	int		res;
+
+	temp = b->next;
+	while (temp->next != NULL)
+	{
+		if (temp->data < b->data)
+		{
+			res = temp->data;
+			temp->data = b->data;
+			b->data = res;
+		}
+		b->next = temp;
+		temp = temp->next;
+	}
+	//return (1);
 }
 
 int main(int argc, char **argv)
@@ -122,17 +218,18 @@ int main(int argc, char **argv)
 		//printf("%d\n",i);
 		i++;
 	}
-	ft_pa(a, b);
+	ft_is_sorted(a);
+	//ft_sa(a);
 	//ft_pb(a, b);
-	//t_stack *r;
-	//r = ft_lstlast(a);
+	// t_stack *r;
+	// r = ft_lstlast(a);
 	// printf("data a :%d", a->data);
 	// printf("\n");
 	
-	// while(a != NULL)
-	// {
-	// 	printf("data a :	%d\n", a->data);
-	// 	a = a->next;
-	// }
-	printf("data a :	%d\n", ft_lstlast(a)->data);
+	while(a != NULL)
+	{
+		printf("data a :	%d\n", a->data);
+		a = a->next;
+	}
+	//printf("data a :	%d\n", ft_lstlast(a)->data);
 }
