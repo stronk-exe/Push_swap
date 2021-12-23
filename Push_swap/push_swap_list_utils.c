@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:09:11 by ael-asri          #+#    #+#             */
-/*   Updated: 2021/12/16 11:27:34 by ael-asri         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:25:19 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ t_stack	*ft_lstlast(t_stack *lst)
 	while (lst != NULL && lst->next != NULL)
 		lst = lst->next;
 	return (lst);
+}
+
+void	ft_lstadd_front(t_stack **lst, t_stack *new)
+{
+	new->next = *lst;
+	*lst = new;
 }
 
 void	ft_lstadd_back(t_stack **lst, t_stack *new)
