@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:08:37 by ael-asri          #+#    #+#             */
-/*   Updated: 2021/12/23 17:43:27 by ael-asri         ###   ########.fr       */
+/*   Updated: 2021/12/24 16:26:08 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,11 +238,8 @@ void	ft_sort_3(t_stack **lst)
 void	ft_sort_5(t_stack **lst)
 {
 	t_stack	*b;
-//	t_stack *temp;
-//	int	sec;
 
 	b = NULL;
-//	b = ft_lstnew(0);
 	ft_pb(lst, &b);
 	ft_pb(lst, &b);
 	
@@ -256,40 +253,59 @@ void	ft_sort_5(t_stack **lst)
 //	int i =0;
 //	while (b != NULL)
 //	{
-		if (b->data > (*lst)->data)
+		if (b->data > ft_lstlast(*lst)->data)
 		{
-			//(*lst) = (*lst)->next;
+			ft_pa(lst, &b);
+			ft_ra(*lst);
+		}
+		/*else if (b->data > (*lst)->data)
+		{
 			ft_ra(*lst);
 			if (b->data > (*lst)->data)
 			{
 				ft_ra(*lst);
-				if (b->data < (*lst)->data)
-				{
+			//	if (b->data < (*lst)->data)
+			//	{
 					ft_pa(lst, &b);
 					ft_rra(lst);
 					ft_rra(lst);
-				}
+			/	}
 				else
 				{
 					ft_ra(*lst);
 					ft_pa(lst, &b);
 					ft_ra(*lst);
-				}
-			}
+				}*/
+		/*	}
 			else
 			{
 				ft_pa(lst, &b);
 				ft_rra(lst);
 			}
+		}*/
+		else if (b->data > (*lst)->data && b->data < ft_lstlast(*lst)->data)
+		{
+			if(b->data < (*lst)->next->data)
+			{
+				ft_pa(lst, &b);
+				ft_sa(*lst);
+			}
+			else
+			{
+				ft_ra(*lst);
+				ft_pa(lst, &b);
+				ft_sa(*lst);
+				ft_rra(lst);
+			}
 		}
+		
 		else
-		{
 			ft_pa(lst, &b);
-		}
 
-	if (b->data > (*lst)->data)
+
+
+/*	if (b->data > (*lst)->data)
 		{
-			//(*lst) = (*lst)->next;
 			ft_ra(*lst);
 			if (b->data > (*lst)->data)
 			{
@@ -300,8 +316,8 @@ void	ft_sort_5(t_stack **lst)
 					if (b->data < (*lst)->data)
 					{
 						ft_pa(lst, &b);
-						ft_rra(lst);
-						ft_rra(lst);
+						ft_ra(*lst);
+						ft_ra(*lst);
 					}
 					else
 					{
@@ -324,10 +340,7 @@ void	ft_sort_5(t_stack **lst)
 			}
 		}
 		else
-		{
-			ft_pa(lst, &b);
-		}
-//	}
+			ft_pa(lst, &b);*/
 }
 
 int main(int argc, char **argv)
@@ -351,8 +364,8 @@ int main(int argc, char **argv)
 		}
 		if (!ft_isdup(a))
 			return (0);
-		if (ft_is_sorted(a))
-			return 0;
+		//if (ft_is_sorted(a))
+	//		return 0;
 		if (ft_lstsize(a) == 3)
 			ft_sort_3(&a);
 		if (ft_lstsize(a) == 5)
