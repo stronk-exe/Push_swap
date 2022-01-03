@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:08:37 by ael-asri          #+#    #+#             */
-/*   Updated: 2021/12/24 16:26:08 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/03 12:22:31 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,103 +244,62 @@ void	ft_sort_5(t_stack **lst)
 	ft_pb(lst, &b);
 	
 	ft_sort_3(lst);
-	//b
-/*	while (b != NULL)
+
+	if (b->data > ft_lstlast(*lst)->data)
 	{
-		printf("data b:	%d\n", b->data);
-		b = b->next;
-	}*/
-//	int i =0;
-//	while (b != NULL)
-//	{
-		if (b->data > ft_lstlast(*lst)->data)
+		ft_pa(lst, &b);
+		ft_ra(*lst);
+	}
+	else if (b->data > (*lst)->data && b->data < ft_lstlast(*lst)->data)
+	{
+		if (b->data < (*lst)->next->data)
 		{
 			ft_pa(lst, &b);
-			ft_ra(*lst);
+			ft_sa(*lst);
 		}
-		/*else if (b->data > (*lst)->data)
+		else
 		{
 			ft_ra(*lst);
-			if (b->data > (*lst)->data)
-			{
-				ft_ra(*lst);
-			//	if (b->data < (*lst)->data)
-			//	{
-					ft_pa(lst, &b);
-					ft_rra(lst);
-					ft_rra(lst);
-			/	}
-				else
-				{
-					ft_ra(*lst);
-					ft_pa(lst, &b);
-					ft_ra(*lst);
-				}*/
-		/*	}
-			else
-			{
-				ft_pa(lst, &b);
-				ft_rra(lst);
-			}
-		}*/
-		else if (b->data > (*lst)->data && b->data < ft_lstlast(*lst)->data)
+			ft_pa(lst, &b);
+			ft_sa(*lst);
+			ft_rra(lst);
+		}
+	}
+	else
+		ft_pa(lst, &b);
+
+	if (b->data > ft_lstlast(*lst)->data)
+	{
+		ft_pa(lst, &b);
+		ft_ra(*lst);
+	}
+	else if (b->data > (*lst)->data && b->data < ft_lstlast(*lst)->data)
+	{
+		if (b->data > (*lst)->next->data)
 		{
-			if(b->data < (*lst)->next->data)
-			{
-				ft_pa(lst, &b);
-				ft_sa(*lst);
-			}
-			else
+			if (b->data < (*lst)->next->next->data)
 			{
 				ft_ra(*lst);
 				ft_pa(lst, &b);
 				ft_sa(*lst);
 				ft_rra(lst);
 			}
-		}
-		
-		else
-			ft_pa(lst, &b);
-
-
-
-/*	if (b->data > (*lst)->data)
-		{
-			ft_ra(*lst);
-			if (b->data > (*lst)->data)
-			{
-				ft_ra(*lst);
-				if (b->data > (*lst)->data)
-				{
-					ft_ra(*lst);
-					if (b->data < (*lst)->data)
-					{
-						ft_pa(lst, &b);
-						ft_ra(*lst);
-						ft_ra(*lst);
-					}
-					else
-					{
-						ft_ra(*lst);
-						ft_pa(lst, &b);
-						ft_ra(*lst);
-					}
-				}
-				else
-				{
-					ft_pa(lst, &b);
-					ft_rra(lst);
-					ft_rra(lst);
-				}
-			}
 			else
 			{
-				ft_pa(lst, &b);
 				ft_rra(lst);
+				ft_pa(lst, &b);
+				ft_ra(*lst);
+				ft_ra(*lst);
 			}
 		}
 		else
-			ft_pa(lst, &b);*/
+		{
+			ft_pa(lst, &b);
+			ft_sa(*lst);
+		}
+	}
+	else
+		ft_pa(lst, &b);
 }
 
 int main(int argc, char **argv)
