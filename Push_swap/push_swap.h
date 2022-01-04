@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:55:57 by ael-asri          #+#    #+#             */
-/*   Updated: 2021/12/22 21:25:23 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/04 15:49:11 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_stack
 {
 	int				data;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }	t_stack;
 
 t_stack	*ft_lstnew(int content);
