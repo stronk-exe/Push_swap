@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:08:37 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/01/04 17:26:16 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/06 10:23:01 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,8 @@ void	ft_sort_5(t_stack **lst)
 	t_stack	*b;
 
 	b = NULL;
-	ft_pb(lst, &b);
+	if (ft_lstsize(*lst) == 5)
+		ft_pb(lst, &b);
 	ft_pb(lst, &b);
 	
 	ft_sort_3(lst);
@@ -267,7 +268,8 @@ void	ft_sort_5(t_stack **lst)
 	}
 	else
 		ft_pa(lst, &b);
-
+	if (b == NULL)
+		return ;
 	if (b->data > ft_lstlast(*lst)->data)
 	{
 		ft_pa(lst, &b);
@@ -315,6 +317,9 @@ void	ft_sort_100(t_stack **lst)
 //	int		c;
 //	int		m;
 
+//int min1;
+//int min2;
+int total;
 	int x;
 
 	i = 0;
@@ -328,68 +333,61 @@ void	ft_sort_100(t_stack **lst)
 
 
 	min = (*lst)->data;
+	
+//min1 = (*lst)->data;
+//min2 = (*lst)->data;
+
 	while (*lst != NULL)
 	{
 		cp = *lst;
 		min = cp->data;
+		total = ft_lstsize(cp);
 		j = 0;
 		x = 0;
-//		printf("v\n");
-//		printf("%d\n", cp->data);
-//		printf("%d\n", min);
-
-	//	printf("j %d\n", j);
-		while (cp != NULL && j < 100)
+		while (cp != NULL && j < total)
 		{
 			if (min > cp->data)
 			{
 				min = cp->data;
 				x = j;
-		//		printf("x %d\n", x);
 			}
 			cp = cp->next;
 			j++;
 		}
-//		printf("tt\n");
-		/*i = 79;
-		j = 79;
-		while (j < 100)
+/////////////////////////////////////////////////////////
+/*		total = ft_lstsize(cp);
+		min1 = cp->data;
+		
+		j = 1;
+		while (cp != NULL && j < (total / 4))
 		{
-			i = 79;
-			while (i < 100)
+			if (min1 > cp->data)
 			{
-				if (cp->data == i)
-				{
-					c = i;
-					x = j;
-					break ;
-				}
-				i++;
+				min1 = cp->data;
+				x = j;
 			}
 			cp = cp->next;
 			j++;
-		}*/
+		}
 
+		while (cp != NULL && j < (((total * 3) / 4) - 1))
+		{
+			cp = cp->next;
+			j++;
+		}
+		min2 = cp->data;
+		while (cp != NULL && j < total)
+		{
+			if (min2 > cp->data)
+			{
+				min2 = cp->data;
+				x = j;
+			}
+			cp = cp->next;
+			j++;
+		}
 
-
-
-
-
-
-
-		
-		// while (i < 100)
-		// {
-		// 	if ((*lst)->data == i)
-		// 	{
-		// 		c = i;
-		// 		x = i;
-		// 		break ;
-		// 	}
-		// 	i++;
-		// }
-		
-		if (x < 50)
+		if (min1 < min2)
 		{
 			while (x > 0)
 			{
@@ -399,56 +397,40 @@ void	ft_sort_100(t_stack **lst)
 		}
 		else
 		{
-			while (x < 100)
+			while (x < total)
 			{
 				ft_rra(lst);
 				x++;
 			}
 		}
-	//	printf("%d\n", (*lst)->data);
-		//while (!ft_is_sorted(b) && b != NULL)
-	//		ft_rb(b);
 		ft_pb(lst, &b);
-	//	printf("%d\n", b->data);
-		
-	//	(*lst) = (*lst)->next;
+*/
+/////////////////////////////////////////////////////////	
+		if (x < (j / 2))
+		{
+			while (x > 0)
+			{
+				ft_ra(*lst);
+				x--;
+			}
+		}
+		else
+		{
+			while (x < j)
+			{
+				ft_rra(lst);
+				x++;
+			}
+		}
+		ft_pb(lst, &b);
 	}
 	while (b != NULL)
 	{
 		ft_pa(lst, &b);
-		b = b->next;
-	}
-	/*while (b != NULL)
-	{
-		printf("%d\n", b->data);
-		b = b->next;
-	}*/
-
-}
-
-
-/*
-void	ft_sort_100(t_stack **lst)
-{
-	t_stack		*min;
-	t_stack		*b;
-	t_stack		*temp;
-	min = ft_lstnew(0);
-
-	temp = *lst;
-	while (temp != NULL)
-	{
-		while (*lst != NULL)
-		{
-			if ((*lst)->data < min->data)
-				min = *lst;
-			(*lst) = (*lst)->next;
-		}
-		ft_pb(&min, &b);
-		temp = (*lst);
+	//	b = b->next;
 	}
 }
-*/
+
 int main(int argc, char **argv)
 {
 	int		i;
@@ -472,12 +454,20 @@ int main(int argc, char **argv)
 			return (0);
 		//if (ft_is_sorted(a))
 	//		return 0;
-		if (ft_lstsize(a) == 3)
+		if (ft_lstsize(a) == 2)
+		{
+			if (!ft_is_sorted(a))
+				ft_sa(a);
+		}
+		else if (ft_lstsize(a) == 3)
 			ft_sort_3(&a);
-		if (ft_lstsize(a) == 5)
+		else if (ft_lstsize(a) <= 5)
 			ft_sort_5(&a);
-		if (ft_lstsize(a) == 100)
+		else if (ft_lstsize(a) <= 100)
 			ft_sort_100(&a);
+
+
+		
 	/*	while (a != NULL)
 		{
 			printf("%d\n", a->data);
@@ -485,3 +475,7 @@ int main(int argc, char **argv)
 		}*/
 	}
 }
+
+//ARG=""; ./a.out $ARG | ./checker_OS $ARG
+
+//82 17 85 29 97 18 22 44 77 05 20 23 41 87 33 37 99 12 49 64 96 93 03 74 01 84 83 14 94 00 32 88 47 43 08 86 25 07 89 16 36 02 78 30 46 71 62 69 27 04 60 50 61 53 76 09 11 52 55 73 38 68 31 80 28 35 06 92 65 19 26 15 48 40 57 39 21 67 34 58 54 81 42 13 70 75 59 66 24 51 63 95 10 45 79 90 98 91 56 72

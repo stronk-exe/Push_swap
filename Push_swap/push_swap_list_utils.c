@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:09:11 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/01/04 15:53:40 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/05 12:18:02 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_stack	*ft_lstnew(int content)
 		return (0);
 	ptr->data = content;
 	ptr->next = NULL;
-	ptr->prev = NULL;
 	return (ptr);
 }
 
