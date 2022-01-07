@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:08:37 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/01/06 10:23:01 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/06 14:58:02 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,20 @@ int ft_is_sorted(t_stack *lst)
 	return (1);
 }
 
+int ft_is_sorted_v2(t_stack *lst)
+{
+	t_stack	*temp;
+
+	while (lst->next != NULL)
+	{
+		temp = lst->next;
+		if (temp->data > lst->data)
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
+
 void	ft_sort_3(t_stack **lst)
 {
 	t_stack	*v;
@@ -317,8 +331,8 @@ void	ft_sort_100(t_stack **lst)
 //	int		c;
 //	int		m;
 
-//int min1;
-//int min2;
+int min1;
+int min2;
 int total;
 	int x;
 
@@ -334,8 +348,8 @@ int total;
 
 	min = (*lst)->data;
 	
-//min1 = (*lst)->data;
-//min2 = (*lst)->data;
+min1 = (*lst)->data;
+min2 = (*lst)->data;
 
 	while (*lst != NULL)
 	{
@@ -344,7 +358,7 @@ int total;
 		total = ft_lstsize(cp);
 		j = 0;
 		x = 0;
-		while (cp != NULL && j < total)
+	/*	while (cp != NULL && j < total)
 		{
 			if (min > cp->data)
 			{
@@ -353,60 +367,100 @@ int total;
 			}
 			cp = cp->next;
 			j++;
-		}
+		}*/
 /////////////////////////////////////////////////////////
-/*		total = ft_lstsize(cp);
-		min1 = cp->data;
-		
-		j = 1;
-		while (cp != NULL && j < (total / 4))
+		total = ft_lstsize(cp);
+	/*	if (total < 3)
 		{
-			if (min1 > cp->data)
+			if (ft_lstsize(cp) == 2)
 			{
-				min1 = cp->data;
-				x = j;
-			}
-			cp = cp->next;
-			j++;
-		}
-
-		while (cp != NULL && j < (((total * 3) / 4) - 1))
-		{
-			cp = cp->next;
-			j++;
-		}
-		min2 = cp->data;
-		while (cp != NULL && j < total)
-		{
-			if (min2 > cp->data)
-			{
-				min2 = cp->data;
-				x = j;
-			}
-			cp = cp->next;
-			j++;
-		}
-
-		if (min1 < min2)
-		{
-			while (x > 0)
-			{
-				ft_ra(*lst);
-				x--;
+				if (!ft_is_sorted(cp))
+					ft_sa(cp);
 			}
 		}
 		else
-		{
-			while (x < total)
+		{*/
+			min1 = cp->data;
+			
+			//j = 1;
+			while (cp != NULL && j < (total / 3))
 			{
-				ft_rra(lst);
-				x++;
+				if (min1 > cp->data)
+				{
+					min1 = cp->data;
+					x = j;
+				}
+				cp = cp->next;
+				j++;
+			}
+
+			while (cp != NULL && j < (((total * 2) / 3)))
+			{
+				cp = cp->next;
+				j++;
+			}
+			
+			min2 = cp->data;
+			while (cp != NULL && j <= total)
+			{
+				if (min2 > cp->data)
+				{
+					min2 = cp->data;
+					x = j;
+				}
+				cp = cp->next;
+				j++;
+			}
+
+			if (x < (j / 3))
+			{
+				while (x > 0)
+				{
+					ft_ra(*lst);
+					x--;
+				}
+			}
+			else
+			{
+				while (x < total)
+				{
+					ft_rra(lst);
+					x++;
+				}
+			}
+
+		if (b != NULL)
+		{
+			while ((*lst)->data > b->data && b != NULL)
+			{
+				ft_rb(b);
+				b = b->next;
 			}
 		}
+	//	}
 		ft_pb(lst, &b);
-*/
+	//	}
+	//	ft_pb(lst, &b);
+		
+		/*	while (!ft_is_sorted_v2(b))
+			{
+				//if (ft_is_sorted_v2(b))
+				//	break ;
+				ft_ra(b);
+				b = b->next;
+			}
+			ft_pb(lst, &b);*/
+		//	ft_rrb(&b);
+		//}
+		//else
+		//{
+		/*	ft_pb(lst, &b);
+			printf("%d\n", min1);
+			printf("%d\n", min2);*/
+		//}
+			
 /////////////////////////////////////////////////////////	
-		if (x < (j / 2))
+/*		if (x < (j / 2))
 		{
 			while (x > 0)
 			{
@@ -422,8 +476,14 @@ int total;
 				x++;
 			}
 		}
-		ft_pb(lst, &b);
+		ft_pb(lst, &b);*/
 	}
+/*	while (b != NULL)
+	{
+		printf("%d\n", b->data);
+		b = b->next;
+	}*/
+		
 	while (b != NULL)
 	{
 		ft_pa(lst, &b);
@@ -468,11 +528,11 @@ int main(int argc, char **argv)
 
 
 		
-	/*	while (a != NULL)
+		while (a != NULL)
 		{
 			printf("%d\n", a->data);
 			a = a->next;
-		}*/
+		}
 	}
 }
 
