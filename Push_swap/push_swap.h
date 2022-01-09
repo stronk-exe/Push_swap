@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:55:57 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/01/05 12:17:48 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/09 19:18:39 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,8 @@ void	ft_lstadd_front(t_stack **lst, t_stack *new);
 void	ft_lstadd_back(t_stack **lst, t_stack *new);
 int		ft_atoi(char *s);
 
+///////////////
+void ft_sort_array(int *t, int n);
+int get_upper(t_stack *b);
+int ft_strlen(int *s);
 #endif

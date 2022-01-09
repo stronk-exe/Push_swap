@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:08:37 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/01/06 14:58:02 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:21:23 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,83 +251,185 @@ void	ft_sort_3(t_stack **lst)
 
 void	ft_sort_5(t_stack **lst)
 {
-	t_stack	*b;
-
-	b = NULL;
-	if (ft_lstsize(*lst) == 5)
-		ft_pb(lst, &b);
-	ft_pb(lst, &b);
-	
-	ft_sort_3(lst);
-
-	if (b->data > ft_lstlast(*lst)->data)
-	{
-		ft_pa(lst, &b);
-		ft_ra(*lst);
-	}
-	else if (b->data > (*lst)->data && b->data < ft_lstlast(*lst)->data)
-	{
-		if (b->data < (*lst)->next->data)
-		{
-			ft_pa(lst, &b);
-			ft_sa(*lst);
-		}
-		else
-		{
-			ft_ra(*lst);
-			ft_pa(lst, &b);
-			ft_sa(*lst);
-			ft_rra(lst);
-		}
-	}
+	if (ft_lstsize(*lst)  <= 3)
+		ft_sort_3(lst);
 	else
-		ft_pa(lst, &b);
-	if (b == NULL)
-		return ;
-	if (b->data > ft_lstlast(*lst)->data)
 	{
-		ft_pa(lst, &b);
-		ft_ra(*lst);
-	}
-	else if (b->data > (*lst)->data && b->data < ft_lstlast(*lst)->data)
-	{
-		if (b->data > (*lst)->next->data)
+		t_stack	*b;
+
+		b = NULL;
+		if (ft_lstsize(*lst) == 5)
+			ft_pb(lst, &b);
+		ft_pb(lst, &b);
+		
+		ft_sort_3(lst);
+
+		if (b->data > ft_lstlast(*lst)->data)
 		{
-			if (b->data < (*lst)->next->next->data)
+			ft_pa(lst, &b);
+			ft_ra(*lst);
+		}
+		else if (b->data > (*lst)->data && b->data < ft_lstlast(*lst)->data)
+		{
+			if (b->data < (*lst)->next->data)
+			{
+				ft_pa(lst, &b);
+				ft_sa(*lst);
+			}
+			else
 			{
 				ft_ra(*lst);
 				ft_pa(lst, &b);
 				ft_sa(*lst);
 				ft_rra(lst);
 			}
+		}
+		else
+			ft_pa(lst, &b);
+		if (b == NULL)
+			return ;
+		if (b->data > ft_lstlast(*lst)->data)
+		{
+			ft_pa(lst, &b);
+			ft_ra(*lst);
+		}
+		else if (b->data > (*lst)->data && b->data < ft_lstlast(*lst)->data)
+		{
+			if (b->data > (*lst)->next->data)
+			{
+				if (b->data < (*lst)->next->next->data)
+				{
+					ft_ra(*lst);
+					ft_pa(lst, &b);
+					ft_sa(*lst);
+					ft_rra(lst);
+				}
+				else
+				{
+					ft_rra(lst);
+					ft_pa(lst, &b);
+					ft_ra(*lst);
+					ft_ra(*lst);
+				}
+			}
 			else
 			{
-				ft_rra(lst);
 				ft_pa(lst, &b);
-				ft_ra(*lst);
-				ft_ra(*lst);
+				ft_sa(*lst);
 			}
 		}
 		else
-		{
 			ft_pa(lst, &b);
-			ft_sa(*lst);
-		}
 	}
-	else
-		ft_pa(lst, &b);
 }
 
 
+//////////////////////////////////////////////
+void recursive_sort(t_stack **lst)
+{
+	t_stack *b = NULL;
+	t_stack *cp;
+	int *t;
+	int mid;
+	int i;
+	int x;
+
+	cp = *lst;
+	int len = ft_lstsize(cp);
+//	printf("%d", len);
+	i = 0;
+	t = malloc(sizeof(int) * (ft_lstsize(*lst) + 1));
+	//if (!t)
+	//	return NULL;
+	while (cp != NULL)
+	{
+		t[i] = cp->data;
+		cp = cp->next;
+		i++;
+	}
+	t[i] = '\0';
+	ft_sort_array(t, len);
+	mid = t[ft_lstsize(*lst) / 2];
+//	printf("mid %d\n", mid);
+	i = 0;
+	
+//	printf("len %d", len);
+//	printf("i %d", i);
+	while (i <= len)
+	{
+	//	printf("i %d", i);
+		if ((*lst)->data < mid)
+			ft_pb(lst, &b);
+		else if (ft_lstlast(*lst)->data < mid)
+		{
+			ft_rra(lst);
+			ft_pb(lst, &b);
+		}
+		else
+			ft_ra(*lst);
+	//	(*lst) = (*lst)->next;  //////////// -- -2 2 4 -- 5 76 99 102 ////  || -2 4 2 ||  102 76 99 ----->>>  -2 4 2 5 76 99 102 
+		i++;
+	}
+//	printf("chuncka\n");            ///////////////  -2 0 2 4 5 /6/ 76 99 102 899 --- ra-pb-pb-ra-pb-ra-pb-pb ---->>> 5 4 2 -2 0 || 899 6 76 99 102
+	//// just dispplying
+
+/*	while (cp != NULL)
+	{
+		printf("cp: %d\n", cp->data);
+		cp = cp->next;
+	}*/
+	/////////////////
+	if (ft_lstsize(*lst) > 5)
+		recursive_sort(lst);
+	else
+	{
+		ft_sort_5(lst);
+	//	printf("yo\n");
+	}
+//	printf("end recu\n");
+//	int x;
+//	i = len/2;
+//printf("-----------i %d", i);
+//printf("size1 %d\n", (ft_lstsize(b)));
+	x = ft_lstsize(b);
+//	printf("-----------x %d", x);
+	while (ft_lstsize(b) > 0)
+	{
+	//	x = get_upper(b);
+		if (get_upper(b))
+			ft_pa(lst, &b);
+		else
+		{
+	/*		while (x > 0)
+			{
+				ft_rb(b);
+				x--;
+			}*/
+			ft_rb(b);
+			//ft_pa(lst, &b);
+	/*		x = get_upper(b);
+			while (x > 0)
+			{
+				ft_rrb(&b);
+				x--;
+			}*/
+		}
+	//	b = b->next;
+		x--;
+	}
+//	printf("size2 %d\n", (ft_lstsize(b)));
+//	printf("wa sf\n");
+}
+//////////////////////////////////////////////
 
 void	ft_sort_100(t_stack **lst)
 {
 	t_stack	*b;
 	t_stack *cp;
-	int		temp[100];
-	int		i;
+//	int		temp[100];
+//	int		i;
 	int		j;
-	int		min;
+//	int		min;
 //	int		c;
 //	int		m;
 
@@ -336,17 +438,12 @@ int min2;
 int total;
 	int x;
 
-	i = 0;
+//	i = 0;
 	cp = *lst;
 //	b = ft_lstnew(0);
-	while (i < 100)
-	{
-		temp[i] = i;
-		i++;
-	}
 
 
-	min = (*lst)->data;
+//	min = (*lst)->data;
 	
 min1 = (*lst)->data;
 min2 = (*lst)->data;
@@ -354,7 +451,7 @@ min2 = (*lst)->data;
 	while (*lst != NULL)
 	{
 		cp = *lst;
-		min = cp->data;
+	//	min = cp->data;
 		total = ft_lstsize(cp);
 		j = 0;
 		x = 0;
@@ -368,7 +465,7 @@ min2 = (*lst)->data;
 			cp = cp->next;
 			j++;
 		}*/
-/////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////// 
 		total = ft_lstsize(cp);
 	/*	if (total < 3)
 		{
@@ -429,35 +526,20 @@ min2 = (*lst)->data;
 				}
 			}
 
-		if (b != NULL)
+	/*	while ((*lst)->data > b->data && b != NULL)
 		{
-			while ((*lst)->data > b->data && b != NULL)
-			{
-				ft_rb(b);
-				b = b->next;
-			}
-		}
+			ft_ra(b);
+			b = b->next;
+		}*/
 	//	}
 		ft_pb(lst, &b);
-	//	}
-	//	ft_pb(lst, &b);
-		
-		/*	while (!ft_is_sorted_v2(b))
-			{
-				//if (ft_is_sorted_v2(b))
-				//	break ;
-				ft_ra(b);
-				b = b->next;
-			}
-			ft_pb(lst, &b);*/
-		//	ft_rrb(&b);
-		//}
-		//else
-		//{
-		/*	ft_pb(lst, &b);
-			printf("%d\n", min1);
-			printf("%d\n", min2);*/
-		//}
+		if (ft_lstsize(cp) <= 3)
+		{
+			ft_sort_3(lst);
+			ft_pa(lst, &b);
+	//		printf("ii\n");
+			break;
+		}
 			
 /////////////////////////////////////////////////////////	
 /*		if (x < (j / 2))
@@ -483,7 +565,64 @@ min2 = (*lst)->data;
 		printf("%d\n", b->data);
 		b = b->next;
 	}*/
-		
+/*	while ((*lst) != NULL)
+	{
+		printf("%d\n", (*lst)->data);
+		(*lst) = (*lst)->next;
+	}*/
+	while (b != NULL)
+	{
+		ft_pa(lst, &b);
+	//	b = b->next;
+	}
+}
+
+
+
+void my_new_100(t_stack **lst)
+{
+	t_stack *b;
+	int *t;
+	int i;
+	int len;
+	int mid;
+
+	i = 0;
+	while (ft_lstsize(*lst) > 5)
+	{
+		t = malloc(sizeof(int) * (ft_lstsize(*lst) + 1));
+		while (lst != NULL)
+		{
+			t[i] = (*lst)->data;
+			(*lst) = (*lst)->next;
+			i++;
+		}
+		t[i] = '\0';
+		len = ft_lstsize((*lst));
+		ft_sort_array(t, len);
+
+		mid = t[ft_lstsize(*lst) / 2];
+		i = 0;
+		while (i < (ft_lstsize(*lst) / 2))
+		{
+			if ((*lst)->data < mid)
+				ft_pb(lst, &b);
+			else if (ft_lstlast(*lst)->data < mid)
+			{
+				ft_rra(lst);
+				ft_pb(lst, &b);
+			}
+			else
+				ft_ra(*lst);
+			i++;
+		}
+	}
+	if (ft_lstsize(*lst) <= 5)
+	{
+		if (ft_lstsize(*lst) <= 3)
+			ft_sort_3(lst);
+		ft_sort_5(lst);
+	}
 	while (b != NULL)
 	{
 		ft_pa(lst, &b);
@@ -495,13 +634,13 @@ int main(int argc, char **argv)
 {
 	int		i;
 	int		data;
-	t_stack	*a;
-	t_stack	*b;	
-	t_stack	*node;
+	t_stack	*a = NULL;
+//	t_stack	*b;	
+	t_stack	*node = NULL;
 
 	if (argc > 2)
 	{
-		b = ft_lstnew(0);
+	//	b = ft_lstnew(0);
 		i = 1;
 		while (i < argc)
 		{
@@ -510,10 +649,9 @@ int main(int argc, char **argv)
 			ft_lstadd_back(&a, node);
 			i++;
 		}
+		
 		if (!ft_isdup(a))
 			return (0);
-		//if (ft_is_sorted(a))
-	//		return 0;
 		if (ft_lstsize(a) == 2)
 		{
 			if (!ft_is_sorted(a))
@@ -523,11 +661,14 @@ int main(int argc, char **argv)
 			ft_sort_3(&a);
 		else if (ft_lstsize(a) <= 5)
 			ft_sort_5(&a);
-		else if (ft_lstsize(a) <= 100)
-			ft_sort_100(&a);
-
-
+	//	else
+	//		ft_sort_100(&a);
+		else
+			recursive_sort(&a);
+			//my_new_100(&a);
 		
+
+	//	printf("/////////////////////////////////////\n");
 		while (a != NULL)
 		{
 			printf("%d\n", a->data);
