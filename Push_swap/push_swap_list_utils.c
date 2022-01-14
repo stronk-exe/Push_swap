@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 15:09:11 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/01/05 12:18:02 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/13 21:26:19 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,32 +65,4 @@ int	ft_lstsize(t_stack *lst)
 		lst = lst->next;
 	}
 	return (count);
-}
-
-int	ft_atoi(char	*str)
-{
-	int	i;
-	int	sign;
-	int	res;
-
-	i = 0;
-	res = 0;
-	sign = 1;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		else if (str[i] == '+')
-			sign = 1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = res * 10 + str[i] - '0';
-		i++;
-	}
-	return (res * sign);
 }
