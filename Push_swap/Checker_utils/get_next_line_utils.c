@@ -34,7 +34,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (s1 == 0 || s2 == 0)
 		return (0);
-	tab = malloc (sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	tab = malloc (sizeof(char) * (ft_strle(s1) + ft_strle(s2) + 1));
 	if (!tab)
 		return (0);
 	i = 0;
@@ -55,7 +55,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (tab);
 }
 
-size_t	ft_strlen(const char	*s)
+size_t	ft_strle(const char	*s)
 {
 	int	i;
 
@@ -74,9 +74,9 @@ char	*ft_substr(char *s, unsigned int start, size_t	len)
 	tab = NULL;
 	if (s == 0)
 		return (0);
-	if (len >= ft_strlen(s))
-		tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	else if (len < ft_strlen(s))
+	if (len >= ft_strle(s))
+		tab = malloc(sizeof(char) * (ft_strle(s) + 1));
+	else if (len < ft_strle(s))
 		tab = malloc(sizeof(char) * (len + 1));
 	if (tab == NULL)
 		return (0);
@@ -97,7 +97,7 @@ char	*ft_strdup(char *s1)
 	int		i;
 	char	*p;
 
-	p = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	p = malloc(sizeof(char) * (ft_strle(s1) + 1));
 	if (p == NULL)
 		return (NULL);
 	i = 0;

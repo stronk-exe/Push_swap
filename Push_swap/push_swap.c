@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:08:37 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/01/14 00:59:22 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/22 15:43:11 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ int ft_is_sorted_v2(t_stack *lst)
 	}
 	return (1);
 }
-/*
+
 void	ft_sort_3(t_stack **lst)
 {
 	t_stack	*v;
@@ -229,30 +229,30 @@ void	ft_sort_3(t_stack **lst)
 	if (a < b && b < c)
 		return ;
 	else if (a < b && b > c && a > c)
-		ft_rra(lst, "rra");
+		ft_rra(lst, "rra\n");
 	else if (a < b && b > c && a < c)
 	{
-		ft_sa(*lst, "sa");
-		ft_ra(*lst, "ra");
+		ft_sa(*lst, "sa\n");
+		ft_ra(*lst, "ra\n");
 	}
 	else if (a < b && b < c)
 	{
-		ft_sa(*lst, "sa");
-		ft_rra(lst, "rra");
+		ft_sa(*lst, "sa\n");
+		ft_rra(lst, "rra\n");
 	}
 	else if (a > b && b < c && a < c)
-		ft_sa(*lst, "sa");
+		ft_sa(*lst, "sa\n");
 	else if (a > b && b < c && a > c)
-		ft_ra(*lst, "ra");
+		ft_ra(*lst, "ra\n");
 	else if (a > b && b > c)
 	{
-		ft_sa(*lst, "sa");
-		ft_rra(lst, "rra");
+		ft_sa(*lst, "sa\n");
+		ft_rra(lst, "rra\n");
 	}
 	else if (a > b && b < c)
-		ft_ra(*lst, "ra");
+		ft_ra(*lst, "ra\n");
 }
-*/
+
 void	ft_sort_5(t_stack **lst)
 {
 
@@ -362,7 +362,7 @@ void recursive_sort(t_stack **lst)
 	}
 	t[i] = '\0';
 	ft_sort_array(t, len);
-	mid = t[ft_lstsize(*lst) / 2];
+	mid = t[ft_lstsize(*lst) / 4];
 	i = 0;
 	ty = 0;
 
@@ -376,9 +376,9 @@ void recursive_sort(t_stack **lst)
 		(gg) = (gg)->next;
 	}*/
 //	printf("len gg  %d\n", ft_lstsize(gg));
-	while (i < len && ty < (len / 2))
+	while (i < len && ty < (len / 4))
 	{
-	/*	if (ft_lstsize(*lst) <= 5)
+		/*if (ft_lstsize(*lst) <= 5)
 		{
 			special_sort_5(lst);
 //			printf("salina akhaa\n");
@@ -392,7 +392,7 @@ void recursive_sort(t_stack **lst)
 //				printf("indexxx  %d\n", index);
 				//if (index >= 0)
 				//{
-					if (index < (ft_lstsize(*lst) / 2))
+					if (index < (ft_lstsize(*lst) / 4))
 					{
 						
 						while (index > 0)
@@ -449,7 +449,7 @@ void recursive_sort(t_stack **lst)
 	{
 		ft_sort_5(lst);
 	}
-	x = ft_lstsize(b);
+//	x = ft_lstsize(b);
 	t_stack *cb;
 //printf("----------ty %d\n", ty);
 	while (ft_lstsize(b) > 0)
@@ -489,26 +489,156 @@ void recursive_sort(t_stack **lst)
 					}
 				}
 				ft_pa(lst, &b, "pa\n");
-	/*		if (is_upper(cb, cb->data))
-			{
-				ft_pa(lst, &b);
-			//	ty++;
-			}
-			else if (is_upper(cb, ft_lstlast(cb)->data))
-			{
-				ft_rrb(&b);
-				ft_pa(lst, &b);
-			//	ty++;
-			}
-			else
-				ft_rb(b);*/
 		}
 		else
 			ft_pa(lst, &b, "pa\n");
-		x--;
+//		x--;
 	//	printf("ty %d\n", ty);
 	}
 }
+//////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+void recursive_sort_500(t_stack **lst)
+{
+	t_stack *b = NULL;
+	t_stack *cp;
+	int *t;
+	int mid;
+	int i=0;
+	int j=0;
+	int x =0;
+	int min;
+	int ty=0;
+
+	min =0;
+	cp = *lst;
+	int len = ft_lstsize(cp);
+	i = 0;
+	t = malloc(sizeof(int) * (ft_lstsize(*lst) + 1));
+	//if (!t)
+	//	return NULL;
+	while (cp != NULL)
+	{
+		t[i] = cp->data;
+		cp = cp->next;
+		i++;
+	}
+	t[i] = '\0';
+	ft_sort_array(t, len);
+	mid = t[ft_lstsize(*lst) / 7];
+	i = 0;
+	ty = 0;
+
+	///////////////////////////////////////////////////////////////
+	t_stack *gg;
+	int index;
+	gg = *lst;
+	while (i < len && ty < (len / 7))
+	{
+		/*if (ft_lstsize(*lst) <= 5)
+		{
+			special_sort_5(lst);
+//			printf("salina akhaa\n");
+			break;
+		}*/
+//		printf("iiii  %d\n", i);
+//		printf("ty  %d\n", ty);
+		gg = *lst;
+	
+				index = get_index(&gg, mid);
+//				printf("indexxx  %d\n", index);
+				//if (index >= 0)
+				//{
+					if (index < (ft_lstsize(*lst) / 7))
+					{
+						
+						while (index > 0)
+						{
+							ft_ra(*lst, "ra\n");
+							index--;
+						}
+					//	ft_pb(lst, &b);
+					//	ty++;
+					}
+					else
+					{
+						while (index < ft_lstsize(*lst))
+						{
+							ft_rra(lst, "rra\n");
+						//	printf("yo\n");
+							index++;
+						}
+					//	ft_pb(lst, &b);
+					//	ty++;
+					}
+					ft_pb(lst, &b, "pb\n");
+					ty++;
+					
+			i++;
+	}
+	if (ft_lstsize(*lst) > 0)
+		recursive_sort(lst);
+/*	else
+	{
+		ft_sort_5(lst);
+	}*/
+//	x = ft_lstsize(b);
+	t_stack *cb;
+//printf("----------ty %d\n", ty)
+	while (ft_lstsize(b) > 0)
+	{
+		cb = b;
+		j =0;
+		x =0;
+		min = cb->data;
+		if (!get_upper(b))
+		{
+				j =0;
+				while (cb != NULL)
+				{
+
+					if (min < cb->data)
+					{
+						min = cb->data;
+						x = j;
+					}
+					cb = cb->next;
+					j++;
+				}
+				if (x <= (j / 2))
+				{
+					while (x > 0)
+					{
+						ft_rb(b, "rb\n");
+						x--;
+					}
+				}
+				else
+				{
+					while (x < j)
+					{
+						ft_rrb(&b, "rrb\n");
+						x++;
+					}
+				}
+				ft_pa(lst, &b, "pa\n");
+		}
+		else
+			ft_pa(lst, &b, "pa\n");
+//		x--;
+	//	printf("ty %d\n", ty);
+	}
+}
+
+
 //////////////////////////////////////////////
 /*
 void	ft_sort_100(t_stack **lst)
@@ -721,20 +851,6 @@ void my_new_100(t_stack **lst)
 */
 void	special_100(t_stack	**lst)
 {
-	///11 chrunck
-	/*
-	1   -> 45
-	46  -> 90
-	91  -> 135
-	136 -> 180
-	181 -> 225
-	225 -> 270
-	271 -> 315
-	316 -> 360
-	361 -> 405
-	406 -> 450
-	451 -> 495
-	*/
 	t_stack *b = NULL;
 	t_stack *cp;
 	int *t;
@@ -772,8 +888,8 @@ void	special_100(t_stack	**lst)
 	ft_sort_array(t, len);
 	mid = t[19];
 //	printf("---------------tt %d\n", t[20]);
-	chk =19;
-	while (chk <= 99)
+	chk = 19;
+	while (ft_lstsize(*lst) > 5 && chk <= 99)
 	{
 //	printf("---------------tt %d\n", t[i]);
 //	printf("---------------mid %d\n", mid);
@@ -802,13 +918,15 @@ void	special_100(t_stack	**lst)
 			ft_pb(lst, &b, "pb\n");
 			ty++;
 			i++;
+		
 		}
+//		printf("i---------- %d\n", i);
+//		printf("chk %d\n", chk);
 		chk += 20;
 		mid = t[chk];
-		
 	}
 //	printf("------------lenwer\n");
-//	ft_sort_5(lst);
+//	special_sort_5(lst);
 
 
 	x = ft_lstsize(b);
@@ -824,7 +942,6 @@ void	special_100(t_stack	**lst)
 				j =0;
 				while (cb != NULL)
 				{
-
 					if (min < cb->data)
 					{
 						min = cb->data;
@@ -868,7 +985,6 @@ void	special_100(t_stack	**lst)
 			ft_pa(lst, &b, "pa\n");
 		x--;
 	}
-	
 }
 
 void	special_500(t_stack	**lst)
@@ -1038,6 +1154,11 @@ int main(int argc, char **argv)
 		i = 1;
 		while (i < argc)
 		{
+			if (!special_strcmp(argv[i]))
+			{
+				write(2, "Error\n", 6);
+				return 0;
+			}
 			data = ft_atoi(argv[i]);
 			node = ft_lstnew(data);
 			ft_lstadd_back(&a, node);
@@ -1063,7 +1184,7 @@ int main(int argc, char **argv)
 		if (ft_lstsize(a) <= 5)
 			ft_sort_5(&a);
 		else if (ft_lstsize(a) == 500)
-			special_500(&a);
+			recursive_sort_500(&a);
 	//	else if (ft_lstsize(a) == 100)
 	//		special_100(&a);
 		else
@@ -1072,11 +1193,11 @@ int main(int argc, char **argv)
 		
 
 	//	printf("/////////////////////////////////////\n");
-		while (a != NULL)
+	/*	while (a != NULL)
 		{
 			printf("%d\n", a->data);
 			a = a->next;
-		}
+		}*/
 	}
 }
 

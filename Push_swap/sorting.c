@@ -80,17 +80,17 @@ void	special_sort_3(t_stack **lst)
 	c = v->data;
 	if (a < b && b < c)
 	{
-		ft_sa(*lst, "sa");
-		ft_rra(lst, "rra");
+		ft_sa(*lst, "sa\n");
+		ft_rra(lst, "rra\n");
 	}
 	//	return ;
 	else if (a < b && b > c && a > c)
-		ft_sa(*lst, "sa");
+		ft_sa(*lst, "sa\n");
 	//	ft_rra(lst);
 	else if (a < b && b > c && a < c)
 	{
 	//	ft_sa(*lst);
-		ft_ra(*lst, "ra");
+		ft_ra(*lst, "ra\n");
 	}
 /*	else if (a < b && b < c)
 	{
@@ -98,12 +98,12 @@ void	special_sort_3(t_stack **lst)
 		ft_rra(lst);
 	}*/
 	else if (a > b && b < c && a < c)
-		ft_rra(lst, "rra");
+		ft_rra(lst, "rra\n");
 	//	ft_sa(*lst);
 	else if (a > b && b < c && a > c)
 	{
-		ft_sa(*lst, "sa");
-		ft_ra(*lst, "ra");
+		ft_sa(*lst, "sa\n");
+		ft_ra(*lst, "ra\n");
 	}	//ft_ra(*lst);
 	else if (a > b && b > c)
 	{
@@ -112,7 +112,7 @@ void	special_sort_3(t_stack **lst)
 	//	ft_rra(lst);
 	}
 	else if (a > b && b < c)
-		ft_ra(*lst, "ra");
+		ft_ra(*lst, "ra\n");
 }
 /*
 void	ft_sort_5(t_stack **lst)
@@ -203,7 +203,7 @@ void	special_sort_5(t_stack **lst)
 	if (ft_lstsize(*lst) == 2)
 	{
 		if (ft_is_sorted(*lst))
-			ft_sa(*lst, "sa");
+			ft_sa(*lst, "sa\n");
 	}
 	else if (ft_lstsize(*lst)  == 3)
 		special_sort_3(lst);
@@ -213,39 +213,39 @@ void	special_sort_5(t_stack **lst)
 
 		b = NULL;
 		if (ft_lstsize(*lst) == 5)
-			ft_pb(lst, &b, "pb");
-		ft_pb(lst, &b, "pb");
+			ft_pb(lst, &b, "pb\n");
+		ft_pb(lst, &b, "pb\n");
 		
 		special_sort_3(lst);
 
 		if (b->data < ft_lstlast(*lst)->data)
 		{
-			ft_pa(lst, &b, "pa");
-			ft_ra(*lst, "ra");
+			ft_pa(lst, &b, "pa\n");
+			ft_ra(*lst, "ra\n");
 		}
 		else if (b->data < (*lst)->data && b->data > ft_lstlast(*lst)->data)
 		{
 			if (b->data > (*lst)->next->data)
 			{
-				ft_pa(lst, &b, "pa");
-				ft_sa(*lst, "sa");
+				ft_pa(lst, &b, "pa\n");
+				ft_sa(*lst, "sa\n");
 			}
 			else
 			{
-				ft_ra(*lst, "ra");
-				ft_pa(lst, &b, "pa");
-				ft_sa(*lst, "sa");
-				ft_rra(lst, "rra");
+				ft_ra(*lst, "ra\n");
+				ft_pa(lst, &b, "pa\n");
+				ft_sa(*lst, "sa\n");
+				ft_rra(lst, "rra\n");
 			}
 		}
 		else
-			ft_pa(lst, &b, "pa");
+			ft_pa(lst, &b, "pa\n");
 		if (b == NULL)
 			return ;
 		if (b->data < ft_lstlast(*lst)->data)
 		{
-			ft_pa(lst, &b, "pa");
-			ft_ra(*lst, "ra");
+			ft_pa(lst, &b, "pa\n");
+			ft_ra(*lst, "ra\n");
 		}
 		else if (b->data < (*lst)->data && b->data > ft_lstlast(*lst)->data)
 		{
@@ -253,27 +253,27 @@ void	special_sort_5(t_stack **lst)
 			{
 				if (b->data > (*lst)->next->next->data)
 				{
-					ft_ra(*lst, "ra");
-					ft_pa(lst, &b, "pa");
-					ft_sa(*lst, "sa");
-					ft_rra(lst, "rra");
+					ft_ra(*lst, "ra\n");
+					ft_pa(lst, &b, "pa\n");
+					ft_sa(*lst, "sa\n");
+					ft_rra(lst, "rra\n");
 				}
 				else
 				{
-					ft_rra(lst, "rra");
-					ft_pa(lst, &b, "pa");
-					ft_ra(*lst, "ra");
-					ft_ra(*lst, "ra");
+					ft_rra(lst, "rra\n");
+					ft_pa(lst, &b, "pa\n");
+					ft_ra(*lst, "ra\n");
+					ft_ra(*lst, "ra\n");
 				}
 			}
 			else
 			{
-				ft_pa(lst, &b, "pa");
-				ft_sa(*lst, "sa");
+				ft_pa(lst, &b, "pa\n");
+				ft_sa(*lst, "sa\n");
 			}
 		}
 		else
-			ft_pa(lst, &b, "pa");
+			ft_pa(lst, &b, "pa\n");
 	}
 }
 

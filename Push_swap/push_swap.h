@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:55:57 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/01/14 00:59:16 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/01/16 13:39:35 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,13 @@ int	ft_isdup(t_stack *a);
 int check_error(t_stack *lst);
 int is_max(t_stack *lst);
 
+int	special_strcmp(char *s1);
 ////////////////////////////////////////////
 /// utils
+//int ft_strlen(char *s);
 void	ft_putstr(char	*s);
 int		ft_atoi(char *s);
+int		ft_strlen(char *s);
 
 ///////////////
 void ft_sort_array(int *t, int n);
