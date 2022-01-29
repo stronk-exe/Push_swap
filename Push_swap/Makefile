@@ -13,22 +13,22 @@
 
 NAME = push_swap
 
-SRCS = push_swap.c push_swap_utils.c push_swap_lis_utils.c errors.c sorting.c actions.c
+SRCS = push_swap.c push_swap_utils.c push_swap_list_utils.c errors.c sorting.c actions.c smallsort.c bigsort.c
 
-CSRCS = Checker_utils/checker_utils.c Checker_utils/get_next_line.c Checker_utils/get_next_line_utils.c Checker_utils/get_next_line.h
- 
+#CSRCS = Checker_utils/checker_utils.c Checker_utils/get_next_line.c Checker_utils/get_next_line_utils.c Checker_utils/get_next_line.h
+
 OBJS = $(SRCS:.c=.o)
 
-COBJS = $(CSRCS:.c=.o)
+#COBJS = $(CSRCS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(COBJS)
+$(NAME): $(OBJS)
 
-.c.o:
-	gcc $(CFLAGS) $< -o $@
+%.o:%.c
+	gcc $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

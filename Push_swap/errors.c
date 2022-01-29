@@ -13,7 +13,6 @@ int	ft_isdup(t_stack *a)
 		{
 			if (temp->data == res)
 			{
-			//	write(2, "Error\n", 6);
 				return (0);
 			}
 			temp = temp->next;
@@ -32,7 +31,6 @@ int is_max(t_stack *lst)
             return (0);
         }
         lst = lst->next;
-    //    printf("hi\n");
     }
     return (1);
 }
@@ -71,7 +69,7 @@ int check_error(t_stack *lst)
 {
     t_stack *cp;
     cp = lst;
-    if (!ft_isdup(cp) || !is_max(cp))
+    if (!ft_isdup(cp) /*|| !is_max(cp)*/)
         return (0);
     return (1);
 }

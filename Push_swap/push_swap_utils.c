@@ -23,21 +23,17 @@ void	ft_putstr(char	*s)
 			i++;
 		}
 	}
-  //  write(1, "\n", 1);
 }
 
-int	ft_atoi(char	*str)
+long	ft_atoi(char	*str)
 {
-	int	i;
-	int	sign;
-	int	res;
+	long	i;
+	long	sign;
+	long	res;
 
 	i = 0;
 	res = 0;
 	sign = 1;
-//	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-//		|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
-//		i++;
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
@@ -53,12 +49,24 @@ int	ft_atoi(char	*str)
 			res = res * 10 + str[i] - '0';
 			i++;
 		}
-		else
-		{
-			write(2, "Error\n", 6);
-		//	return NULL;
-		}
-		
 	}
 	return (res * sign);
+}
+
+char	*ft_strdup(char *s1)
+{
+	int		i;
+	char	*p;
+
+	p = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (p == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
 }
