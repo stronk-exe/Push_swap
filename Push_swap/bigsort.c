@@ -1,26 +1,215 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bigsort.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/02 10:49:47 by ael-asri          #+#    #+#             */
+/*   Updated: 2022/02/03 18:55:52 by ael-asri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void recursive_sort(t_stack **lst)
+t_stack	*do_action_bctoa(t_stack	**lst, t_stack *bc, int x)
 {
-	t_stack *b = NULL;
-	t_stack *c = NULL;
-	t_stack *cp;
-	int *t;
-	int mid;
-	int i=0;
-	int j=0;
-	int x =0;
-	int min;
-	int ty=0;
-	int j2, min2, x2;
+	if (!get_upper(bc))
+	{
+		if (x <= (ft_lstsize(bc) / 2))
+		{
+			while (x > 0)
+			{
+				ft_rb(bc, "rb\n");
+				x--;
+			}
+		}
+		else
+		{
+			while (x < ft_lstsize(bc))
+			{
+				ft_rrb(&bc, "rrb\n");
+				x++;
+			}
+		}
+		ft_pa(lst, &bc, "pa\n");
+	}
+	else
+		ft_pa(lst, &bc, "pa\n");
+	return (bc);
+}
 
-	min =0;
-	cp = *lst;
-	int len = ft_lstsize(cp);
+int	get_min_value(t_stack *lst)
+{
+	int	min;
+	int	j;
+
+	j = 0;
+	min = lst->data;
+	while (lst != NULL)
+	{
+		if (min < lst->data)
+			min = lst->data;
+		lst = lst->next;
+		j++;
+	}
+	return (min);
+}
+
+int	get_min_index(t_stack *lst)
+{
+	int	min;
+	int	j;
+	int	x;
+
+	x = 0;
+	j = 0;
+	min = lst->data;
+	while (lst != NULL)
+	{
+		if (min < lst->data)
+		{
+			min = lst->data;
+			x = j;
+		}
+		lst = lst->next;
+		j++;
+	}
+	return (x);
+}
+
+t_stack	*b_is_null(t_stack **lst, t_stack *b)
+{
+	int	x;
+
+	x = get_min_index(b);
+	if (!get_upper(b))
+	{
+		if (x <= (ft_lstsize(*lst) / 2))
+		{
+			while (x > 0)
+			{
+				ft_rb(b, "rb\n");
+				x--;
+			}
+		}
+		else
+		{
+			while (x < ft_lstsize(*lst))
+			{
+				ft_rrb(&b, "rrb\n");
+				x++;
+			}
+		}
+	}
+	ft_pa(lst, &b, "pa\n");
+	return (b);
+}
+
+t_stack	*c_is_null(t_stack **lst, t_stack *c)
+{
+	int	x;
+
+	x = get_min_index(c);
+	if (!get_upper(c))
+	{
+		if (x <= (ft_lstsize(*lst) / 2))
+		{
+			while (x > 0)
+			{
+				ft_rb(c, "rb\n");
+				x--;
+			}
+		}
+		else
+		{
+			while (x < ft_lstsize(*lst))
+			{
+				ft_rrb(&c, "rrb\n");
+				x++;
+			}
+		}
+	}
+	ft_pa(lst, &c, "pa\n");
+	return (c);
+}
+
+void	one_is_null(t_stack	**lst, t_stack *b, t_stack	*c)
+{
+	if (ft_lstsize(b) && !ft_lstsize(c))
+	{
+		while (ft_lstsize(b) > 0)
+		{
+			b = b_is_null(lst, b);
+		}
+	}
+	else if (!ft_lstsize(b) && ft_lstsize(c))
+	{
+		while (ft_lstsize(c) > 0)
+		{
+			c = c_is_null(lst, c);
+		}
+	}
+}
+/////////////////  b | c to a
+void	bctoa(t_stack	**lst, t_stack *b, t_stack	*c)
+{
+	int	x;
+	int	x2;
+	int	min;
+	int	min2;
+
+	while (ft_lstsize(b) > 0 || ft_lstsize(c) > 0)
+	{
+		if ((!ft_lstsize(b) && ft_lstsize(c))
+			|| (ft_lstsize(b) && !ft_lstsize(c)))
+		{
+			one_is_null(lst, b, c);
+			break ;
+		}
+		min = get_min_value(b);
+		x = get_min_index(b);
+		min2 = get_min_value(c);
+		x2 = get_min_index(c);
+		if (min > min2)
+			b = do_action_bctoa(lst, b, x);
+		else
+			c = do_action_bctoa(lst, c, x2);
+	}
+}
+
+void	do_action_atobc(t_stack **lst, int	index, int x)
+{
+	if (x == 1)
+	{
+		while (index > 0)
+		{
+			ft_ra(*lst, "ra\n");
+			index--;
+		}
+	}
+	else
+	{
+		while (index < ft_lstsize(*lst))
+		{
+			ft_rra(lst, "rra\n");
+			index++;
+		}
+	}
+}
+
+int	fill_and_sort_array(t_stack **lst)
+{
+	t_stack	*cp;
+	int		i;
+	int		*t;
+	int		mid;
+
 	i = 0;
+	cp = *lst;
 	t = malloc(sizeof(int) * (ft_lstsize(*lst) + 1));
 //	if (!t)
-//		return NULL;
+//		return (NULL);
 	while (cp != NULL)
 	{
 		t[i] = cp->data;
@@ -28,356 +217,90 @@ void recursive_sort(t_stack **lst)
 		i++;
 	}
 	t[i] = '\0';
-	ft_sort_array(t, len);
+	ft_sort_array(t, i);
 	mid = t[ft_lstsize(*lst) / 4];
-	i = 0;
-	ty = 0;
+	return (mid);
+}
 
-	t_stack *gg;
-	int index;
-	gg = *lst;
-	while (i < len && ty < (len / 4))
+void	atobc(t_stack	**lst, int mid)
+{
+	int	index;
+//	int	mid;
+
+//	mid = fill_and_sort_array(lst);
+	index = get_index(lst, mid);
+	if (index < (ft_lstsize(*lst) / 4))
+		do_action_atobc(lst, index, 1);
+	else
+		do_action_atobc(lst, index, 2);
+/*	if (ty < (len / 8))
+		ft_pb(lst, &b, "pb\n");
+	else
+		ft_pb(lst, &c, "pb\n");
+	return (lst);*/
+}
+/*
+t_stack	**check_bc(t_stack **lst, t_stack *b, t_stack *c, int len, int mid)
+{
+	int	ty;
+
+	ty = 0;
+	while (ty < (len / 4))
 	{
-		gg = *lst;
-		index = get_index(&gg, mid);
-		if (index < (ft_lstsize(*lst) / 4))
-		{						
-			while (index > 0)
-			{
-				ft_ra(*lst, "ra\n");
-				index--;
-			}
-		}
-		else
-		{
-			while (index < ft_lstsize(*lst))
-			{
-				ft_rra(lst, "rra\n");
-				index++;
-			}
-		}
+		atobc(lst, mid);
 		if (ty < (len / 8))
 			ft_pb(lst, &b, "pb\n");
 		else
 			ft_pb(lst, &c, "pb\n");
 		ty++;
-		i++;
 	}
-	if (ft_lstsize(*lst) > 5)
-		recursive_sort(lst);
-	else
-	{
-		ft_sort_5(lst);
-	}
-	t_stack *cb;
-	t_stack *cc;
-	while (ft_lstsize(b) > 0 || ft_lstsize(c) > 0)
-	{
-		cb = b;
-		cc = c;
-		j =0;
-		j2 = 0;
-		x =0;
-		x2 = 0;
-
-		if ((!ft_lstsize(b) && ft_lstsize(c)) || (ft_lstsize(b) && !ft_lstsize(c)))
-		{
-			if (ft_lstsize(b) && !ft_lstsize(c))
-			{
-				while (ft_lstsize(b) > 0)
-				{
-					cb = b;
-					min = cb->data;
-					j = 0;
-					x = 0;
-					while (cb != NULL)
-					{
-						if (min < cb->data)
-						{
-							min = cb->data;
-							x = j;
-						}
-						cb = cb->next;
-						j++;
-					}
-					if (!get_upper(b))
-					{
-						if (x <= (j / 2))
-						{
-							while (x > 0)
-							{
-								ft_rb(b, "rb\n");
-								x--;
-							}
-						}
-						else
-						{
-							while (x < j)
-							{
-								ft_rrb(&b, "rrb\n");
-								x++;
-							}
-						}
-						ft_pa(lst, &b, "pa\n");
-					}
-					else
-						ft_pa(lst, &b, "pa\n");
-					
-				}
-				
-			}
-			else if (!ft_lstsize(b) && ft_lstsize(c))
-			{
-				while (ft_lstsize(c) > 0)
-				{
-					cc = c;
-					min2 = cc->data;
-					j2 = 0;
-					x2 = 0;
-					while (cc != NULL)
-					{
-						if (min2 < cc->data)
-						{
-							min2 = cc->data;
-							x2 = j2;
-						}
-						cc = cc->next;
-						j2++;
-					}
-					if (!get_upper(c))
-					{
-						if (x2 <= (j2 / 2))
-						{
-							while (x2 > 0)
-							{
-								ft_rb(c, "rb\n");
-								x2--;
-							}
-						}
-						else
-						{
-							while (x2 < j2)
-							{
-								ft_rrb(&c, "rrb\n");
-								x2++;
-							}
-						}
-						ft_pa(lst, &c, "pa\n");
-					}
-					else
-						ft_pa(lst, &c, "pa\n");
-				}
-			}
-			break;
-		}	
-		min = cb->data;
-		min2 = cc->data;
-
-		while (cb != NULL)
-		{
-			if (min < cb->data)
-			{
-				min = cb->data;
-				x = j;
-			}
-			cb = cb->next;
-			j++;
-		}
-		while (cc != NULL)
-		{
-			if (min2 < cc->data)
-			{
-				min2 = cc->data;
-				x2 = j2;
-			}
-			cc = cc->next;
-			j2++;
-		}
-		if (min > min2)
-		{
-			if (!get_upper(b))
-			{
-				if (x <= (j / 2))
-				{
-					while (x > 0)
-					{
-						ft_rb(b, "rb\n");
-						x--;
-					}
-				}
-				else
-				{
-					while (x < j)
-					{
-						ft_rrb(&b, "rrb\n");
-						x++;
-					}
-				}
-				ft_pa(lst, &b, "pa\n");
-			}
-			else
-				ft_pa(lst, &b, "pa\n");
-		}
-		else
-		{
-			if (!get_upper(c))
-			{
-				if (x2 <= (j2 / 2))
-				{
-					while (x2 > 0)
-					{
-						ft_rb(c, "rb\n");
-						x2--;
-					}
-				}
-				else
-				{
-					while (x2 < j2)
-					{
-						ft_rrb(&c, "rrb\n");
-						x2++;
-					}
-				}
-				ft_pa(lst, &c, "pa\n");
-			}
-			else
-				ft_pa(lst, &c, "pa\n");
-		}
-	}
+	return lst;
 }
-/*
-void recursive_sort_500(t_stack **lst)
+
+t_stack	*fill_b(t_stack	**lst, t_stack	*b)
 {
-	t_stack *b = NULL;
-	t_stack *cp;
-	int *t;
-	int mid;
-	int i=0;
-	int j=0;
-	int x =0;
-	int min;
-	int ty=0;
+	if (!b)
+		b = NULL;
+	ft_pb(lst, &b, "pb\n");
+	return (b);
+}
 
-	min =0;
-	cp = *lst;
-	int len = ft_lstsize(cp);
-	i = 0;
-	t = malloc(sizeof(int) * (ft_lstsize(*lst) + 1));
-	//if (!t)
-	//	return NULL;
-	while (cp != NULL)
-	{
-		t[i] = cp->data;
-		cp = cp->next;
-		i++;
-	}
-	t[i] = '\0';
-	ft_sort_array(t, len);
-	mid = t[ft_lstsize(*lst) / 7];
-	i = 0;
-	ty = 0;
-
-	/////////////////////////////////////////////////////////////// 7 --> 8201    11 --> 8220
-	t_stack *gg;
-	int index;
-	gg = *lst;
-	while (i < len && ty < (len / 7))
-	{
-//		printf("iiii  %d\n", i);
-//		printf("ty  %d\n", ty);
-		gg = *lst;
-	
-		index = get_index(&gg, mid);
-//				printf("indexxx  %d\n", index);
-		if (index < (ft_lstsize(*lst) / 7))
-		{			
-			while (index > 0)
-			{
-				ft_ra(*lst, "ra\n");
-				index--;
-			}
-		}
-		else
-		{
-			while (index < ft_lstsize(*lst))
-			{
-				ft_rra(lst, "rra\n");
-					//	printf("yo\n");
-				index++;
-			}
-		}
-		ft_pb(lst, &b, "pb\n");
-		ty++;		
-		i++;
-	}
-	if (ft_lstsize(*lst) > 1)
-		recursive_sort(lst);*/
-/*	else
-	{
-		ft_sort_5(lst);
-	}*/
-//	x = ft_lstsize(b);
-//	t_stack *cb;
-//printf("----------ty %d\n", ty)
-/*	while (ft_lstsize(b) > 0)
-	{
-		cb = b;
-		j =0;
-		x =0;
-		min = cb->data;*/
-	/*	if (get_s_upper(b))
-		{
-			printf("what\n");
-			ft_pa(lst, &b, "pa\n");
-			ft_pa(lst, &b, "pa\n");
-		}
-		else*//* if (!get_upper(b))
-		{
-				j =0;
-				while (cb != NULL)
-				{
-
-					if (min < cb->data)
-					{
-						min = cb->data;
-						x = j;
-					}
-					cb = cb->next;
-					j++;
-				}
-				while (cb != NULL)
-				{
-
-					if (min < cb->data)
-					{
-						min = cb->data;
-						x = j;
-					}
-					cb = cb->next;
-					j++;
-				}
-				
-				if (x <= (j / 2))
-				{
-					while (x > 0)
-					{
-						ft_rb(b, "rb\n");
-						x--;
-					}
-				}
-				else
-				{
-					while (x < j)
-					{
-						ft_rrb(&b, "rrb\n");
-						x++;
-					}
-				}
-				ft_pa(lst, &b, "pa\n");
-		}
-		else
-			ft_pa(lst, &b, "pa\n");
-	//	printf("ty %d\n", ty);
-	}
+t_stack	*fill_c(t_stack	**lst, t_stack	*c)
+{
+	if (!c)
+		c = NULL;
+	ft_pb(lst, &c, "pb\n");
+	return (c);
 }
 */
+int recursive_sort(t_stack **lst)
+{
+	t_stack	*b;
+	t_stack	*c;
+	int		mid;
+	int		ty;
+	int		len;
+
+	ty = 0;
+	b = NULL;
+	c = NULL;
+	len = ft_lstsize(*lst);
+	mid = fill_and_sort_array(lst);
+//	if (!mid)
+//		return (NULL);
+	while (ty < (len / 4))
+	{
+		atobc(lst, mid);
+		if (ty < (len / 8))
+			ft_pb(lst, &b, "pb\n");
+		else
+			ft_pb(lst, &c, "pb\n");
+		ty++;
+	}
+	if (ft_lstsize(*lst) > 3)
+		recursive_sort(lst);
+	else
+		small_sort(lst);
+	bctoa(lst, b, c);
+	return (1);
+}
