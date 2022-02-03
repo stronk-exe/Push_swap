@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:50:33 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/03 17:17:28 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:45:16 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_sort_5(t_stack **lst);
 
 //////////////// big sort
 int		recursive_sort(t_stack **lst);
+int		recursive_sort_2(t_stack **lst);
 
 //////////////// errors
 int		ft_isdup(t_stack *a);
