@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:50:33 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/03 20:45:16 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:48:14 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,13 @@ typedef struct s_stack
 
 //////////
 char	*ft_strdup(char *s1);
-
+int		ft_strcmp(char	*s1, char	*s2);
 /////////////
 t_stack	*ft_lstnew(int content);
 int		ft_lstsize(t_stack *lst);
 t_stack	*ft_lstlast(t_stack *lst);
 void	ft_lstadd_front(t_stack **lst, t_stack *new);
 void	ft_lstadd_back(t_stack **lst, t_stack *new);
-
-//////////////////////////////////////////
-////  Checker
-int		get_actions(t_stack **a, t_stack **b);
-int		ft_strcmp(const char *s1, const char *s2);
 
 ////////////////////////////////
 ////  actions
@@ -88,5 +83,23 @@ void	special_sort_3(t_stack **lst);
 int		get_index(t_stack **lst, int mid);
 int		is_upper(t_stack *b, int data);
 int		get_s_upper(t_stack *b);
+
+//////////////////////////////////////////
+////  Checker
+/*# define BUFFER_SIZE 3
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+
+int		get_actions(t_stack **a, t_stack **b);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strjoin(char *s1, char *s2);
+int		ft_strchr(char	*s);
+size_t	ft_strle(const char	*s);
+char	*ft_substr(char	*s, unsigned int start, size_t	len);
+size_t	ft_strlcpy(char *dst, const char *src, size_t	dstsize);
+char	*ft_strdup(char *s1);
+char	*get_next_line(int fd);*/
+int	get_actions(t_stack **a, t_stack **b);
 
 #endif

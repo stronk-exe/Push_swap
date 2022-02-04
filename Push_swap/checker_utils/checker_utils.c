@@ -6,12 +6,12 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:50:10 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/03 12:57:44 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:50:04 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
+/*
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t			i;
@@ -33,3 +33,4 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (0);
 }
+*/

@@ -6,37 +6,38 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 20:36:04 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/03 22:56:02 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:41:02 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*do_action_bctoa2(t_stack	**lst, t_stack *bc, int x)
+t_stack	*do_action_btoa2(t_stack	**lst, t_stack *b, int x)
 {
-	if (!get_upper(bc))
+//	printf("weshhhhhhh %d\n", x);
+	if (!get_upper(b))
 	{
-		if (x <= (ft_lstsize(bc) / 2))
+		if (x <= (ft_lstsize(b) / 2))
 		{
 			while (x > 0)
 			{
-				ft_rb(bc, "rb\n");
+				ft_rb(b, "rb\n");
 				x--;
 			}
 		}
 		else
 		{
-			while (x < ft_lstsize(bc))
+			while (x < ft_lstsize(b))
 			{
-				ft_rrb(&bc, "rrb\n");
+				ft_rrb(&b, "rrb\n");
 				x++;
 			}
 		}
-		ft_pa(lst, &bc, "pa\n");
+		ft_pa(lst, &b, "pa\n");
 	}
 	else
-		ft_pa(lst, &bc, "pa\n");
-	return (bc);
+		ft_pa(lst, &b, "pa\n");
+	return (b);
 }
 
 int	get_min_value2(t_stack *lst)
@@ -79,16 +80,16 @@ int	get_min_index2(t_stack *lst)
 }
 
 /////////////////  b | c to a
-void	bctoa2(t_stack	**lst, t_stack *b)
+void	btoa2(t_stack	**lst, t_stack *b)
 {
 	int	x;
-	int	min;
+//	int	min;
 
 	while (ft_lstsize(b) > 0)
 	{
-		min = get_min_value2(b);
+//		min = get_min_value2(b);
 		x = get_min_index2(b);
-		b = do_action_bctoa2(lst, b, x);
+		b = do_action_btoa2(lst, b, x);
 	}
 }
 
@@ -112,8 +113,31 @@ int	fill_and_sort_array2(t_stack **lst)
 	}
 	t[i] = '\0';
 	ft_sort_array(t, i);
-	mid = t[ft_lstsize(*lst) / 4];
+	mid = t[ft_lstsize(*lst) / 7];
 	return (mid);
+}
+
+void	actions_in_a2(t_stack **lst, int mid)
+{
+	int	index;
+
+	index = get_index(lst, mid);
+	if (index <= ft_lstsize(*lst) / 2)
+	{
+		while (index > 0)
+		{
+			ft_ra(*lst, "ra\n");
+			index--;
+		}
+	}
+	else
+	{
+		while (index < ft_lstsize(*lst))
+		{
+			ft_rra(lst, "rra\n");
+			index++;
+		}
+	}
 }
 
 int recursive_sort_2(t_stack **lst)
@@ -122,7 +146,6 @@ int recursive_sort_2(t_stack **lst)
 	int		mid;
 	int		ty;
 	int		len;
-	int	index;
 
 	ty = 0;
 	b = NULL;
@@ -130,32 +153,16 @@ int recursive_sort_2(t_stack **lst)
 	mid = fill_and_sort_array2(lst);
 //	if (!mid)
 //		return (NULL);
-	while (ty < (len / 6/*to change!!!*/))
+	while (ty < (len / 7))   // 4/5 -----------   9->7087 | 8->7040 | 7->6858 | 6->7008
 	{
-		index = get_index(lst, mid);
-		if (index < ft_lstsize(*lst) / 2)     // 4->7898 | 5->6126 | 6->5026
-		{
-			while (index > 0)
-			{
-				ft_ra(*lst, "ra\n");
-				index--;
-			}
-		}
-		else
-		{
-			while (index < ft_lstsize(*lst))
-			{
-				ft_rra(lst, "rra\n");
-				index++;
-			}
-		}
+		actions_in_a2(lst, mid);
 		ft_pb(lst, &b, "pb\n");
 		ty++;
 	}
-	if (ft_lstsize(*lst) > 5)
+	if (ft_lstsize(*lst) >= 7)
 		recursive_sort_2(lst);
 	else
-		small_sort(lst);
-	bctoa2(lst, b);
+		recursive_sort(lst);
+	btoa2(lst, b);
 	return (1);
 }

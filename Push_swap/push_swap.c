@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:50:26 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/03 22:56:16 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:52:02 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,25 @@ int	ft_is_sorted_v2(t_stack *lst)
 int	main(int argc, char **argv)
 {
 	int		i;
-	long		data;
-	t_stack	*a = NULL;
-	t_stack	*node = NULL;
+	long	data;
+	t_stack	*a;
+	t_stack	*node;
 
+	a = NULL;
+	node = NULL;
 	if (argc > 2)
 	{
 	//	printf("ac %d\n", argc);
 		i = 1;
 		while (i < argc)
 		{
-			if (!special_strcmp(argv[i]))
+			if (!special_strcmp(argv[i]) || !ft_strcmp(argv[i], "\"\""))
 			{
 				write(2, "Error\n", 6);
 				return 0;
 			}
 			data = ft_atoi(argv[i]);
-			if (data > 2147483647)
+			if (data > 2147483647 || data < -2147483648)
 			{
 				write(2, "Error\n", 6);
 				return 0;
@@ -72,7 +74,7 @@ int	main(int argc, char **argv)
 			return (0);
 		if (!check_error(a))
 		{
-			write(2,"Error\n", 6);
+			write(2, "Error\n", 6);
 			return 0;
 		}
 		if (ft_lstsize(a) < 5)
@@ -89,20 +91,20 @@ int	main(int argc, char **argv)
 			if (!recursive_sort_2(&a))
 				return (0);
 		}
-
 	/////////////////////////////////////// testing /////////////////////////////////////////////////
-	/*	int count = 0;
+		int count = 0;
 		if (ft_is_sorted(a))
 			printf("1\n");
 		else
 			printf("0\n");
+		printf("----\n");
 		while (a != NULL)
 		{
-			printf("%d\n", a->data);
+	//		printf("%d\n", a->data);
 			a = a->next;
 			count++;
 		}
-		printf("count %d\n", count);*/
+		printf("count %d\n", count);
 	/////////////////////////////////////// testing /////////////////////////////////////////////////
 	}
 }

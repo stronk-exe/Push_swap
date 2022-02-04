@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:37:51 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/02 15:38:57 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:47:42 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,18 @@ int	get_index(t_stack **lst, int mid)
 	if (i < ((ft_lstsize(*lst) - j)))
 		return (i);
 	return (j);
+}
+
+int	ft_strcmp(char	*s1, char	*s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
 }

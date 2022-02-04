@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:57:39 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/02 10:58:12 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:28:23 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*ft_substr(char *s, unsigned int start, size_t	len)
 	return (tab);
 }
 
-char	*ft_strdup(char *s1)
+char	*ft_strdup2(char *s1)
 {
 	int		i;
 	char	*p;

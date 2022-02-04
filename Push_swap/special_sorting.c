@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:46:06 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/02 15:40:28 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:50:43 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,16 @@ void	special_sort_3(t_stack **lst)
 	{
 		ft_sa(*lst, "sa\n");
 		ft_ra(*lst, "ra\n");
-	}*/
-/*	else if (a > b && b > c)
+	}
+	else if (a > b && b > c)
 	{
 		return ;
 	}
 	else if (a > b && b < c)
-		ft_ra(*lst, "ra\n");*/
-//}
+		ft_ra(*lst, "ra\n");
+}
 
 // special sorting 5
-/*void   yoyo(t_stack **lst, t_stack  *b)
-{
-    
-}
-
-void    annother_one(t_stack **lst, t_stack *b)
-{
-    
-}
 
 void    special_first_one(t_stack **lst, t_stack *b)
 {
@@ -102,8 +93,8 @@ void	special_sort_5(t_stack **lst)
 		if (ft_lstsize(*lst) == 5)
 			ft_pb(lst, &b, "pb\n");
 		ft_pb(lst, &b, "pb\n");	
-		special_sort_3(lst);*/
-	/*	if (b->data < ft_lstlast(*lst)->data)
+		special_sort_3(lst);
+		if (b->data < ft_lstlast(*lst)->data)
 		{
 			ft_pa(lst, &b, "pa\n");
 			ft_ra(*lst, "ra\n");
@@ -126,8 +117,8 @@ void	special_sort_5(t_stack **lst)
 		else
 			ft_pa(lst, &b, "pa\n");
 		if (b == NULL)
-			return ;*/
-	/*	if (b->data < ft_lstlast(*lst)->data)
+			return ;
+		if (b->data < ft_lstlast(*lst)->data)
 		{
 			ft_pa(lst, &b, "pa\n");
 			ft_ra(*lst, "ra\n");

@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:57:33 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/02 10:58:29 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:28:30 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_strchr(char	*s);
 size_t	ft_strle(const char	*s);
 char	*ft_substr(char	*s, unsigned int start, size_t	len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t	dstsize);
-char	*ft_strdup(char *s1);
+char	*ft_strdup2(char *s1);
 char	*get_next_line(int fd);
 
 #endif
