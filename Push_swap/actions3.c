@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:41:35 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/02 15:42:45 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:47:24 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ void	ft_rr(t_stack *a, t_stack *b, char *s)
 	ft_putstr(s);
 }
 
-void	ft_rrr(t_stack **a, t_stack **b, char *s)
+int	ft_rrr(t_stack **a, t_stack **b, char *s)
 {
-	ft_rra(a, "");
-	ft_rrb(b, "");
+	if (!ft_rra(a, ""))
+		return (0);
+	if (!ft_rrb(b, ""))
+		return (0);
 	ft_putstr(s);
+	return (1);
 }

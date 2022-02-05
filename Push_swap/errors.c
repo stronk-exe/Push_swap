@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:50:19 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/04 21:44:58 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/05 11:46:35 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ int	check_error(t_stack *lst)
 
 	cp = lst;
 	if (!ft_isdup(cp))
+	{
+		write(2, "Error\n", 6);
 		return (0);
+	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:50:33 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/04 21:48:14 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:47:29 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	ft_lstadd_back(t_stack **lst, t_stack *new);
 void	ft_sa(t_stack *a, char *s);
 void	ft_sb(t_stack *b, char *s);
 void	ft_ss(t_stack *a, t_stack *b, char *s);
-void	ft_pa(t_stack **a, t_stack **b, char *s);
-void	ft_pb(t_stack **a, t_stack **b, char *s);
+int		ft_pa(t_stack **a, t_stack **b, char *s);
+int		ft_pb(t_stack **a, t_stack **b, char *s);
 void	ft_ra(t_stack *a, char *s);
 void	ft_rb(t_stack *b, char *s);
 void	ft_rr(t_stack *a, t_stack *b, char *s);
-void	ft_rra(t_stack **a, char *s);
-void	ft_rrb(t_stack **b, char *s);
-void	ft_rrr(t_stack **a, t_stack **b, char *s);
+int		ft_rra(t_stack **a, char *s);
+int		ft_rrb(t_stack **b, char *s);
+int		ft_rrr(t_stack **a, t_stack **b, char *s);
 
 /////////////////////////////////////
 //// sorting

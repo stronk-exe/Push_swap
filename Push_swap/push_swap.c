@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:50:26 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/04 21:52:02 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/05 15:07:50 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,59 +40,73 @@ int	ft_is_sorted_v2(t_stack *lst)
 	return (1);
 }
 
-int	main(int argc, char **argv)
+t_stack	*get_data(char *av)
 {
 	int		i;
 	long	data;
+	t_stack	*node;
+
+	i = 0;
+	node = NULL;
+	if (!special_strcmp(av) || !ft_strcmp(av, "\"\""))
+	{
+		write(2, "Error\n", 6);
+		return (0);
+	}
+	data = ft_atoi(av);
+	if (data > 2147483647 || data < -2147483648)
+	{
+		write(2, "Error\n", 6);
+		return (0);
+	}
+	node = ft_lstnew((int)data);
+	return (node);
+}
+
+int	do_something(t_stack **a)
+{
+	if (ft_lstsize(*a) < 5)
+		small_sort(a);
+	else if (ft_lstsize(*a) <= 100)
+	{
+		if (!recursive_sort(a))
+			return (0);
+	}
+	else
+	{
+		if (!recursive_sort_2(a))
+			return (0);
+	}
+	return (1);
+}
+
+int	main(int argc, char **argv)
+{
+	int		i;
 	t_stack	*a;
 	t_stack	*node;
 
 	a = NULL;
-	node = NULL;
 	if (argc > 2)
 	{
-	//	printf("ac %d\n", argc);
 		i = 1;
 		while (i < argc)
 		{
-			if (!special_strcmp(argv[i]) || !ft_strcmp(argv[i], "\"\""))
-			{
-				write(2, "Error\n", 6);
-				return 0;
-			}
-			data = ft_atoi(argv[i]);
-			if (data > 2147483647 || data < -2147483648)
-			{
-				write(2, "Error\n", 6);
-				return 0;
-			}
-			node = ft_lstnew((int)data);
+			node = get_data(argv[i]);
+			if (!node)
+				return (0);
 			ft_lstadd_back(&a, node);
 			i++;
 		}
-		if (ft_is_sorted(a))
+		if (!check_error(a) || ft_is_sorted(a))
 			return (0);
-		if (!check_error(a))
-		{
-			write(2, "Error\n", 6);
-			return 0;
-		}
-		if (ft_lstsize(a) < 5)
-			small_sort(&a);
-		//	ft_sort_5(&a);
-		else if (ft_lstsize(a) <= 100)
-		{
-			//if (!recursive_sort(&a))
-			if (!recursive_sort(&a))
-				return (0);
-		}
-		else
-		{
-			if (!recursive_sort_2(&a))
-				return (0);
-		}
+		if (!do_something(&a))
+			return (0);
+		// lstclear a, node
+
+
 	/////////////////////////////////////// testing /////////////////////////////////////////////////
-		int count = 0;
+	/*	int count = 0;
 		if (ft_is_sorted(a))
 			printf("1\n");
 		else
@@ -105,6 +119,7 @@ int	main(int argc, char **argv)
 			count++;
 		}
 		printf("count %d\n", count);
+	//	system("leaks a.out");*/
 	/////////////////////////////////////// testing /////////////////////////////////////////////////
 	}
 }

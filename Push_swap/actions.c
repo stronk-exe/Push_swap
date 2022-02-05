@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:49:39 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/02 15:42:39 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:57:46 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ void	ft_sb(t_stack *b, char *s)
 	ft_putstr(s);
 }
 
-void	ft_pa(t_stack **a, t_stack **b, char *s)
+int	ft_pa(t_stack **a, t_stack **b, char *s)
 {
 	t_stack	*temp;
 	t_stack	*t;
 
+	if (!b)
+		return (0);
 	t = ft_lstnew((*b)->data);
+	if (!t)
+		return (0);
 	if (b != NULL)
 	{
 		ft_lstadd_front(a, t);
@@ -50,14 +54,19 @@ void	ft_pa(t_stack **a, t_stack **b, char *s)
 		free(temp);
 	}
 	ft_putstr(s);
+	return (1);
 }
 
-void	ft_pb(t_stack **a, t_stack **b, char *s)
+int	ft_pb(t_stack **a, t_stack **b, char *s)
 {
 	t_stack	*temp;
 	t_stack	*t;
 
+	if (!a)
+		return (0);
 	t = ft_lstnew((*a)->data);
+	if (!t)
+		return (0);
 	if (a != NULL)
 	{
 		ft_lstadd_front(b, t);
@@ -66,4 +75,5 @@ void	ft_pb(t_stack **a, t_stack **b, char *s)
 		free(temp);
 	}
 	ft_putstr(s);
+	return (1);
 }
