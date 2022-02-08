@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 20:53:37 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/06 21:20:11 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:09:17 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,23 @@ int	get_min_value5(t_stack *lst)
 	return (min);
 }
 
+int	get_2th_max_value5(t_stack *lst, int val)
+{
+	int	min;
+	int	j;
+
+	j = 0;
+	min = lst->data;
+	while (lst != NULL && lst->data != val)
+	{
+		if (min > lst->data)
+			min = lst->data;
+		lst = lst->next;
+		j++;
+	}
+	return (min);
+}
+
 int	get_min_index5(t_stack *lst)
 {
 	int	min;
@@ -64,20 +81,66 @@ int	get_min_index5(t_stack *lst)
 
 	x = 0;
 	j = 0;
-	min = lst->data;
-	while (lst != NULL)
+	if (ft_lstsize(lst) > 0)
 	{
-		if (min < lst->data)
+		min = lst->data;
+		while (lst != NULL)
 		{
-			min = lst->data;
-			x = j;
+			if (min < lst->data)
+			{
+				min = lst->data;
+				x = j;
+			}
+			lst = lst->next;
+			j++;
 		}
-		lst = lst->next;
-		j++;
 	}
 	return (x);
 }
 
+int	get_max_index5(t_stack *lst)
+{
+	int	max;
+	int	j;
+	int	x;
+
+	x = 0;
+	j = 0;
+		max = lst->data;
+		while (lst != NULL)
+		{
+			if (max < lst->data)
+			{
+				max = lst->data;
+				x = j;
+			}
+			lst = lst->next;
+			j++;
+		}
+	return (x);
+}
+
+int	get_2th_max_index5(t_stack *lst, int val)
+{
+	int	max;
+	int	j;
+	int	x;
+
+	x = 0;
+	j = 0;
+		max = lst->data;
+		while (lst != NULL)
+		{
+			if (max < lst->data && lst->data < val)
+			{
+				max = lst->data;
+				x = j;
+			}
+			lst = lst->next;
+			j++;
+		}
+	return (x);
+}
 /////////////////  b | c to a
 void	btoa5(t_stack	**lst, t_stack *b)
 {
@@ -275,6 +338,85 @@ int	get_new_min(t_stack **lst, int mid, int chk)
 	}
 }*/
 
+
+t_stack	*sortb_then_pa(t_stack **lst, t_stack *b, int x)
+{
+//	if (!get_upper(b))
+//	{
+	
+		if (x <= (ft_lstsize(b) / 2))
+		{
+			while (x > 0)
+			{
+				ft_rb(b, "rb\n");
+				x--;
+			}
+		}
+		else
+		{
+			while (x < ft_lstsize(b))
+			{
+				ft_rrb(&b, "rrb\n");
+				x++;
+			}
+		}
+		ft_pa(lst, &b, "pa\n");
+//	}
+//	else
+//		ft_pa(lst, &b, "pa\n");
+	return (b);
+}
+
+t_stack	*pa_then_sorta(t_stack **lst, t_stack *b, int x)
+{
+//	if (!get_upper(*lst))
+//	{
+		printf("x in fun %d\n", x);
+		printf("lstsize in func %d\n", ft_lstsize(*lst));
+		if (ft_lstsize(*lst) == 1)
+		{
+			ft_pa(lst, &b, "pa\n");
+			ft_ra(*lst, "ra\n");
+		}
+		else if (x <= (ft_lstsize(*lst) / 2))
+		{
+			while (x > 0)
+			{
+				ft_ra(*lst, "ra\n");
+				x--;
+			}
+			ft_pa(lst, &b, "pa\n");
+		}
+		else
+		{
+			while (x < ft_lstsize(*lst))
+			{
+				ft_rra(lst, "rra\n");
+				x++;
+			}
+			ft_pa(lst, &b, "pa\n");
+		}
+		
+//	}
+//	else
+//		ft_pa(lst, &b, "pa\n");
+	return (b);
+}
+
+int	special_get_index(t_stack *lst, int val)
+{
+	int	i;
+
+	i = 1;
+	while (lst != NULL)
+	{
+		if (lst->data < val)
+			return (i);
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}		
 t_stack **new_sort(t_stack **lst)
 {
 	t_stack	*b;
@@ -296,7 +438,7 @@ t_stack **new_sort(t_stack **lst)
 //	max = get_max(lst);
 //	if (!mid)
 //		return (NULL);
-	if (ft_lstsize(*lst) < 150)
+	if (ft_lstsize(*lst) <= 100)
 	{
 	/*	chk = (len / 8);
 		while (ft_lstsize(*lst) > (len / 2))
@@ -385,7 +527,7 @@ t_stack **new_sort(t_stack **lst)
 				printf("lssst b %d\n", ft_lstsize(b));
 			}
 		}*/
-		chk = (len / 8);
+		chk = (len / 9);
 		while (ft_lstsize(*lst) > 0)
 		{
 			ty = 0;
@@ -417,7 +559,7 @@ t_stack **new_sort(t_stack **lst)
 	}
 	else
 	{
-		chk = (len / 18);
+		chk = (len / 17);
 		while (ft_lstsize(*lst) > 0)
 		{
 			ty = 0;
@@ -447,6 +589,133 @@ t_stack **new_sort(t_stack **lst)
 			}
 		}
 	}
-	btoa5(lst, b);
+//	if (ft_lstsize(b) > 100)
+//		btoa5(lst, b);
+//	printf("----------- 1/2 -------------\n");
+	//
+	///////////////////////////////////////////////////////////////
+	int	max1;
+	int	max2;
+	int val;
+	int	val2;
+	int	m1;
+	int	m2;
+	int	z;
+
+	while (ft_lstsize(b) > 0)
+	{
+		
+		max1 = get_max_index5(b);
+		val = get_min_value5(b);
+		val2 = get_2th_max_value5(b, val);
+		max2 = get_2th_max_index5(b, val);
+		i = 0;
+		ty = 0;
+		z = 0;
+
+		if (max1 > (ft_lstsize(b) / 2))
+			m1 = ft_lstsize(b) - max1;
+		else
+			m1 = max1;
+		if (max2 > (ft_lstsize(b) / 2))
+			m2 = ft_lstsize(b) - max2;
+		else
+			m2 = max2;
+
+//	printf("max1 %d\n", max1);
+//	printf("max2 %d\n", max2);
+		if (m1 > m2)
+		{
+			b = do_action_bctoa5(lst, b, max2);
+			max1 = get_max_index5(b);
+//			printf("max1 %d\n", max1);
+			b = do_action_bctoa5(lst, b, max1);
+//			printf("lst b %d\n", ft_lstsize(b));
+			z = 1;
+		}
+		else
+			b = do_action_bctoa5(lst, b, max1);
+		if (z)
+			ft_sa(*lst, "sa\n");
+	}
+	////////////////////////////////////////////////////////////
+//		printf("max1 %d\n", max1);
+//		printf("max2 %d\n", max2);
+	//	printf("daaa %d\n", da_one);
+
+/*	while (ty < 2 && ft_lstsize(b) > 0)
+	{
+		z = 0;
+		if (max1 == i)
+		{
+			ft_pa(lst, &b, "pa\n");
+			ty++;
+		}
+*/	/*	else if (b->data == val2)
+		{
+			ft_pa(lst, &b, "pa\n");
+		//	z = 1;
+		}*/
+		/*else if (max1 < ft_lstsize(b) / 2)
+		{
+			ft_rb(b, "rb\n");
+		}
+		else
+		{
+			ft_rrb(&b, "rrb\n");
+		}
+		i++;
+	//	printf("size b %d\n", ft_lstsize(b));
+//	}
+	//if (y¸¸¸)
+	//	ft_sa(*lst, "sa\n");
+	//--------------------------------------------------
+	if (max1 < max2)
+	{
+		
+	}
+	//--------------------------------------------------
+	}*/
+//	ft_pa(lst, &b, "pa\n");
+	/////////////////////////////////////////////////
+//	ft_pa(lst, &b, "pa\n");
+/*	int	top_of_b;
+	int	c;
+	int m;
+	int	n;
+	int	x;
+//	int	mid;
+	while (ft_lstsize(b) > 0)
+	{
+		top_of_b = b->data;
+		n = special_get_index(*lst, top_of_b);
+
+		
+	//	m = (get_max_index5(b));
+//	printf("m %d\n", m);
+	
+		
+	//	min_val = get_min_value5(*lst);
+
+
+
+		mid = fill_and_sort_array5(lst);
+		x = get_index(lst, mid);
+		c = (get_max_index5(b));
+		if (c > ft_lstsize(b)/2)
+			m = ft_lstsize(b) - c;
+		else
+			m = c;
+		if (m < n)
+		{
+			b = sortb_then_pa(lst, b, x);
+		}
+		else
+		{
+			b = pa_then_sorta(lst, b, n);
+		}
+	}*/
+	
+	////////////////////////////////////////////////////////////
 	return (lst);
 }
