@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:37:51 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/04 21:47:42 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:11:49 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	get_index(t_stack **lst, int mid)
 	t[i] = '\0';
 	i = get_pos_index(lst, t, mid);
 	j = get_pos_index_rev(lst, t, mid);
+	free(t);
 	if (i < ((ft_lstsize(*lst) - j)))
 		return (i);
 	return (j);

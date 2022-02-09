@@ -6,24 +6,30 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:41:35 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/05 13:47:24 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:12:23 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_ss(t_stack *a, t_stack *b, char *s)
+int	ft_ss(t_stack *a, t_stack *b, char *s)
 {
+	if (ft_lstsize(a) < 2 || ft_lstsize(b) < 2)
+		return (0);
 	ft_sa(a, "");
 	ft_sb(b, "");
 	ft_putstr(s);
+	return (1);
 }
 
-void	ft_rr(t_stack *a, t_stack *b, char *s)
+int	ft_rr(t_stack *a, t_stack *b, char *s)
 {
+	if (ft_lstsize(a) < 2 || ft_lstsize(b) < 2)
+		return (0);
 	ft_ra(a, "");
 	ft_rb(b, "");
 	ft_putstr(s);
+	return (1);
 }
 
 int	ft_rrr(t_stack **a, t_stack **b, char *s)

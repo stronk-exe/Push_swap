@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:50:33 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/05 13:47:29 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:40:37 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "checker_utils/get_next_line.h"
 
 typedef struct s_stack
 {
@@ -36,14 +37,14 @@ void	ft_lstadd_back(t_stack **lst, t_stack *new);
 
 ////////////////////////////////
 ////  actions
-void	ft_sa(t_stack *a, char *s);
-void	ft_sb(t_stack *b, char *s);
-void	ft_ss(t_stack *a, t_stack *b, char *s);
+int		ft_sa(t_stack *a, char *s);
+int		ft_sb(t_stack *b, char *s);
+int		ft_ss(t_stack *a, t_stack *b, char *s);
 int		ft_pa(t_stack **a, t_stack **b, char *s);
 int		ft_pb(t_stack **a, t_stack **b, char *s);
-void	ft_ra(t_stack *a, char *s);
-void	ft_rb(t_stack *b, char *s);
-void	ft_rr(t_stack *a, t_stack *b, char *s);
+int		ft_ra(t_stack *a, char *s);
+int		ft_rb(t_stack *b, char *s);
+int		ft_rr(t_stack *a, t_stack *b, char *s);
 int		ft_rra(t_stack **a, char *s);
 int		ft_rrb(t_stack **b, char *s);
 int		ft_rrr(t_stack **a, t_stack **b, char *s);
@@ -55,13 +56,23 @@ int		ft_is_sorted(t_stack *lst);
 /////////////// small sort
 void	small_sort(t_stack **lst);
 
+t_stack	**new_sort(t_stack **lst);
+
 void	ft_sort_3(t_stack **lst);
 void	ft_sort_5(t_stack **lst);
 
 //////////////// big sort
-int		recursive_sort(t_stack **lst);
-int		recursive_sort_2(t_stack **lst);
+t_stack	**recursive_sort(t_stack **lst);
+t_stack	**recursive_sort_2(t_stack **lst);
 
+/////////////////////////////
+int		fill_and_sort_array5(t_stack **lst);
+t_stack	*do_action_bctoa5(t_stack	**lst, t_stack *b, int x);
+///atob
+t_stack	*small_one(t_stack **lst, t_stack *b, int chk);
+t_stack	*big_one(t_stack **lst, t_stack *b, int chk);
+//// btoa
+t_stack	**b_to_a(t_stack **lst, t_stack *b);
 //////////////// errors
 int		ft_isdup(t_stack *a);
 int		check_error(t_stack *lst);
@@ -76,6 +87,18 @@ long	ft_atoi(char *s);
 int		ft_strlen(char *s);
 
 ///////////////
+// min max indexes
+int		get_max(t_stack **lst, int chk);
+int		get_min(t_stack **lst, int chk);
+int		get_min_index5(t_stack *lst);
+int		get_max_index5(t_stack *lst);
+int		get_2th_max_index5(t_stack *lst, int val);
+
+////// get max min values
+int		get_min_value5(t_stack *lst);
+int		get_2th_max_value5(t_stack *lst, int val);
+
+////////////////
 void	ft_sort_array(int *t, int n);
 int		get_upper(t_stack *b);
 void	special_sort_5(t_stack **lst);
@@ -86,20 +109,6 @@ int		get_s_upper(t_stack *b);
 
 //////////////////////////////////////////
 ////  Checker
-/*# define BUFFER_SIZE 3
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-
 int		get_actions(t_stack **a, t_stack **b);
-int		ft_strcmp(const char *s1, const char *s2);
-char	*ft_strjoin(char *s1, char *s2);
-int		ft_strchr(char	*s);
-size_t	ft_strle(const char	*s);
-char	*ft_substr(char	*s, unsigned int start, size_t	len);
-size_t	ft_strlcpy(char *dst, const char *src, size_t	dstsize);
-char	*ft_strdup(char *s1);
-char	*get_next_line(int fd);*/
-int	get_actions(t_stack **a, t_stack **b);
 
 #endif

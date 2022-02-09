@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:51:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/02 14:50:53 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:40:14 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,19 +108,6 @@ void	first_one(t_stack **lst, t_stack *b)
 		return ;
 	another_one(lst, b);
 }
-/*
-void	ft_sort_5(t_stack **lst)
-{
-	t_stack	*b;
-
-	b = NULL;
-	if (ft_lstsize(*lst) == 5)
-		ft_pb(lst, &b, "pb\n");
-	ft_pb(lst, &b, "pb\n");
-	ft_sort_3(lst);
-	first_one(lst, b);
-}
-*/
 
 void	small_sort(t_stack **lst)
 {

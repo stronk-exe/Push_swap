@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 10:49:47 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/05 15:16:02 by ael-asri         ###   ########.fr       */
+/*   Created: 2022/02/05 20:53:37 by ael-asri          #+#    #+#             */
+/*   Updated: 2022/02/09 15:28:31 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*do_action_bctoa(t_stack	**lst, t_stack *b, int x)
+t_stack	*do_action_bctoa5(t_stack	**lst, t_stack *b, int x)
 {
 	if (!get_upper(b))
 	{
@@ -39,60 +39,7 @@ t_stack	*do_action_bctoa(t_stack	**lst, t_stack *b, int x)
 	return (b);
 }
 
-int	get_min_value(t_stack *lst)
-{
-	int	min;
-	int	j;
-
-	j = 0;
-	min = lst->data;
-	while (lst != NULL)
-	{
-		if (min < lst->data)
-			min = lst->data;
-		lst = lst->next;
-		j++;
-	}
-	return (min);
-}
-
-int	get_min_index(t_stack *lst)
-{
-	int	min;
-	int	j;
-	int	x;
-
-	x = 0;
-	j = 0;
-	min = lst->data;
-	while (lst != NULL)
-	{
-		if (min < lst->data)
-		{
-			min = lst->data;
-			x = j;
-		}
-		lst = lst->next;
-		j++;
-	}
-	return (x);
-}
-
-/////////////////  b | c to a
-void	bctoa(t_stack	**lst, t_stack *b)
-{
-	int	x;
-//	int	min;
-
-	while (ft_lstsize(b) > 0)
-	{
-//		min = get_min_value(b);
-		x = get_min_index(b);
-		b = do_action_bctoa(lst, b, x);
-	}
-}
-
-int	fill_and_sort_array(t_stack **lst)
+int	fill_and_sort_array5(t_stack **lst)
 {
 	t_stack	*cp;
 	int		i;
@@ -102,8 +49,8 @@ int	fill_and_sort_array(t_stack **lst)
 	i = 0;
 	cp = *lst;
 	t = malloc(sizeof(int) * (ft_lstsize(*lst) + 1));
-//	if (!t)
-//		return (NULL);
+	if (!t)
+		exit(1);
 	while (cp != NULL)
 	{
 		t[i] = cp->data;
@@ -112,56 +59,31 @@ int	fill_and_sort_array(t_stack **lst)
 	}
 	t[i] = '\0';
 	ft_sort_array(t, i);
-	mid = t[ft_lstsize(*lst) / 4];
+	mid = t[ft_lstsize(*lst) / 2];
+	free(t);
 	return (mid);
 }
 
-void	actions_in_a(t_stack **lst, int mid)
-{
-	int	index;
-
-	index = get_index(lst, mid);
-	if (index <= ft_lstsize(*lst) / 2)
-	{
-		while (index > 0)
-		{
-			ft_ra(*lst, "ra\n");
-			index--;
-		}
-	}
-	else
-	{
-		while (index < ft_lstsize(*lst))
-		{
-			ft_rra(lst, "rra\n");
-			index++;
-		}
-	}
-}
-
-int recursive_sort(t_stack **lst)
+t_stack	**new_sort(t_stack **lst)
 {
 	t_stack	*b;
-	int		mid;
-	int		ty;
-	int		len;
+	int		chk;
 
-	ty = 0;
 	b = NULL;
-	len = ft_lstsize(*lst);
-	mid = fill_and_sort_array(lst);
-//	if (!mid)
-//		return (NULL);
-	while (ty < (len / 4)) // 3->655 | 4->643 | 
+	if (ft_lstsize(*lst) <= 100)
 	{
-		actions_in_a(lst, mid);
-		ft_pb(lst, &b, "pb\n");
-		ty++;
+		chk = (ft_lstsize(*lst) / 9);
+		b = small_one(lst, b, chk);
+		if (!b)
+			return (NULL);
 	}
-	if (ft_lstsize(*lst) >= 4)
-		recursive_sort(lst);
 	else
-		small_sort(lst);
-	bctoa(lst, b);
-	return (1);
+	{
+		chk = (ft_lstsize(*lst) / 17);
+		b = big_one(lst, b, chk);
+		if (!b)
+			return (NULL);
+	}
+	lst = b_to_a(lst, b);
+	return (lst);
 }

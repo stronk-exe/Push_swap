@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:57:33 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/04 21:28:30 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:25:25 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include "../push_swap.h"
 
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char	*s);

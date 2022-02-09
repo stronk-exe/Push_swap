@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 10:50:19 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/02/05 11:46:35 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:11:20 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,43 +47,21 @@ int	is_max(t_stack *lst)
 	return (1);
 }
 
-int	check_singe(char *s1)
-{
-	int	i;
-
-	i = 0;
-	if (s1[i] == '-' || s1[i] == '+')
-		return (1);
-	return (0);
-}
-
-int	special_strcmp(char *s1)
+int	special_strcmp(char *s)
 {
 	int		i;
-	int		j;
-	int		x;
-	char	*s2;
 
-	s2 = ft_strdup("0123456789");
 	i = 0;
-	x = check_singe(s1);
-	if (x)
+	if ((s[i] == '-' || s[i] == '+') && (s[i + 1] != '\0'))
 		i++;
-	while (s1[i])
+	while (s[i] != '\0')
 	{
-		j = 0;
-		while (s2[j])
-		{
-			if (s1[i] == s2[j])
-				x++;
-			j++;
-		}
-		i++;
+		if (s[i] >= '0' && s[i] <= '9')
+			i++;
+		else
+			return (0);
 	}
-	free (s2);
-	if (x == ft_strlen(s1))
-		return (1);
-	return (0);
+	return (1);
 }
 
 int	check_error(t_stack *lst)
